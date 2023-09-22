@@ -1,0 +1,859 @@
+﻿@{
+    if (Convert.ToBoolean(@ViewBag.ViewFree))
+    {
+        ViewBag.Title = "Agregar";
+        Layout = "~/Views/Shared/BuscarCitasPasaport.cshtml";
+    }
+    else
+    {
+        ViewBag.Title = "Agregar";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+}
+<link href="~/Content/css/layout.css" rel="stylesheet" />
+
+<script defer src="~/Scripts/APP/PoliticaSocial/PoliticaSocial.js"></script>
+@*<div class="contenedor">
+        <img src="~/images/243273c3-c4d6-41ce-9586-fa874800842d.png" alt="Descripción de la imagen" width="320" height="200">
+    </div>*@
+<div class="contenedor" style="text-align: center;">
+    <img src="~/images/243273c3-c4d6-41ce-9586-fa874800842d.png" alt="Descripción de la imagen" style="max-width: 30%;" />
+    <img src="~/images/Gober.png" alt="Descripción de la segunda imagen" style="max-width: 15%;" />
+</div>
+
+
+<h1 class="p-1 mb-2 text-white" style="background-color: #006068; text-align: center; "><strong>INSCRIPCIÓN ENCUENTRO MUNICIPAL DE PERSONAS MAYORES</strong></h1>
+<hr width=100% align="right" size=200 color="black">
+
+<div class="row m-0">
+
+    @Html.AntiForgeryToken()
+    <form id="FormPolitica" name="FormPolitica">
+        <div asp-validation-summar="ModelOnly" class="text-danger"></div>
+
+        <div class="row m-0">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Tipo Documento <span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="TipoDocumento" name="TipoDocumento">
+                    <option value="">Seleccionar</option>
+                    <option value="Ducumento de Ciudadania">Cedula de Ciudadania</option>
+                    <option value="Registro Civil">Registro Civil</option>
+                    <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                    <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Numero Documento <span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="number" class="form-control" id="NumeroDocumento" name="NumeroDocumento" placeholder="Digite su numero de documento" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Nombres <span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="text" class="form-control" id="NombresPolitica" name="NombresPolitica" placeholder="Digite su nombre completo" />
+                <span asp-validation-for="NombresPasaporte" class="text-danger"></span>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Apellidos<span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="text" class="form-control" id="ApellidosPolitica" name="ApellidosPolitica" placeholder="Digite sus apellidos completos" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Fecha Nacimiento<span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="date" class="form-control" id="FechaNacimiento" name="FechaNacimiento" placeholder="Digite la fecha de nacimiento" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Edad<span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="number" class="form-control" id="EdadPolitica" name="EdadPolitica" placeholder="Digite su edad" disabled />
+            </div>
+
+            <script>
+                // Obtener los elementos del DOM
+                const fechaNacimientoInput = document.getElementById('FechaNacimiento');
+                const edadPoliticaInput = document.getElementById('EdadPolitica');
+
+                // Agregar un evento de escucha al cambio en el campo de fecha de nacimiento
+                fechaNacimientoInput.addEventListener('change', function () {
+                    // Obtener la fecha seleccionada
+                    const fechaNacimiento = new Date(this.value);
+
+                    // Obtener la fecha actual
+                    const fechaActual = new Date();
+
+                    // Calcular la edad en años
+                    let edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
+
+                    // Verificar si el cumpleaños aún no ha pasado este año
+                    if (fechaNacimiento.getMonth() > fechaActual.getMonth() || (fechaNacimiento.getMonth() === fechaActual.getMonth() && fechaNacimiento.getDate() > fechaActual.getDate())) {
+                        edad--;
+                    }
+
+                    // Actualizar el valor del campo de edad
+                    edadPoliticaInput.value = edad;
+                });
+            </script>
+
+            @*<div class="col-xs-6 col-sm-6 col-md-6">
+                    <label><strong>Fecha Nacimiento<span style="color: red;"> *</span></strong></label>
+                    <input style="border: black; border-width: 1px; border-style: solid;" type="date" class="form-control" id="FechaNacimiento" name="FechaNacimiento" placeholder="Digite la fecha de expedicion de su documento" />
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <label><strong>Edad<span style="color: red;"> *</span></strong></label>
+                    <input style="border: black; border-width: 1px; border-style: solid;" type="number" class="form-control" id="EdadPolitica" name="EdadPolitica" placeholder="Digite su numero de documento" />
+                </div>*@
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label>
+                    <strong>
+                        Tipo de sangre
+                        <span style="color: red;"> *</span>
+                    </strong>
+                </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="TipoSangre" name="TipoSangre">
+                    <option value="">Seleccionar</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Rol <span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="RolPoliticaSocial" name="RolPoliticaSocial">
+                    <option value="">Seleccionar</option>
+                    <option value="Persona Mayor">Persona Mayor</option>
+                    <option value="Cuidador">Cuidador</option>
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Sexo Nacimiento <span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="SexoNacimiento" name="SexoNacimiento">
+                    <option value="">Seleccionar</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
+                    <option value="Intersexual">Intersexual</option>
+                    <option value="Prefiero no Decirlo">Prefiero no Decirlo</option>
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Identidad de Genero<span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="IdentidadGenero" name="IdentidadGenero">
+                    <option value="">Seleccionar</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Transgénero">Transgénero</option>
+                    <option value="No Binario">No Binario</option>
+                    <option value="Prefiero no Decirlo">Prefiero no Decirlo</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Orientación Sexual<span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="OrientacionSexual" name="OrientacionSexual">
+                    <option value="">Seleccionar</option>
+                    <option value="Heterosexual">Heterosexual</option>
+                    <option value="Gay">Gay</option>
+                    <option value="Bisexual">Bisexual</option>
+                    <option value="Prefiero no Decirlo">Prefiero no Decirlo</option>
+                    <option value="Lesbiana">Lesbiana</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Se reconoce como alguna Discapacidad <span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="Discapacidad" name="Discapacidad">
+                    <option value="">Seleccionar</option>
+                    <option value="Auditiva">Auditiva</option>
+                    <option value="Física">Física</option>
+                    <option value="Intelectual">Intelectual</option>
+                    <option value="Múltiples">Múltiples</option>
+                    <option value="Psicosocial">Psicosocial</option>
+                    <option value="Visual">Visual</option>
+                    <option value="Sordoceguera">Sordoceguera</option>
+                    <option value="Ninguno">Ninguno</option>
+                    <option value="Prefiero no Decirlo">Prefiero no Decirlo</option>
+
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Se Reconoce en algún Grupo Étnico<span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="GrupoEtnico" name="GrupoEtnico">
+                    <option value="">Seleccionar</option>
+                    <option value="Indigena">Indigena</option>
+                    <option value="Rrom">Rrom</option>
+                    <option value="Negro">Negro</option>
+                    <option value="Afro">Afro</option>
+                    <option value="Raizal">Raizal</option>
+                    <option value="Palenquera">Palenquera/o</option>
+                    <option value="Indígena Wayuu">Indígena Wayuu</option>
+                    <option value="Campesino">Campesino</option>
+                    <option value="Prefiero no Decirlo">Prefiero no Decirlo</option>
+                    <option value="Ninguno">Ninguno</option>
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label>
+                    <strong>
+                        Se reconoce como victima de conflicto armado
+                        <span style="color: red;"> *</span>
+                    </strong>
+                </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="VictimaConflictoArmado" name="VictimaConflictoArmado">
+                    <option value="">Seleccionar</option>
+                    <option value="Si">Si</option>
+                    <option value="no">no</option>
+                    <option value="Prefiero no Decirlo">Prefiero no Decirlo</option>
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label>
+                    <strong>
+                        Se reconoce dentro de la población priorizada
+                        <span style="color: red;"> *</span>
+                    </strong>
+                </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="PoblacionPriorizada" name="PoblacionPriorizada">
+                    <option value="">Seleccionar</option>
+                    <option value="Persona Mayor">Persona Mayor</option>
+                    <option value="Persona con discapacidad">Persona con discapacidad</option>
+                    <option value="Mujer Lideresa">Mujer Lideresa</option>
+                    <option value="Lider Social">Lider Social</option>
+                    <option value="Veterano de la fuerza Publica">Veterano de la fuerza Publica</option>
+                    <option value="Ninguno">Ninguno</option>
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Correo electrónico<span style="color: red;"> *</span></strong> </label>
+                <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="CorreoElectronico" name="CorreoElectronico" placeholder="Digite su correo electrónico" type="email" onchange="validarCorreo()" />
+            </div>
+
+
+
+
+            @*<div class="col-xs-6 col-sm-6 col-md-6">
+                    <label><strong>Correo electrónico<span style="color: red;"> *</span></strong> </label>
+                    <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="CorreoElectronico" name="CorreoElectronico" placeholder="Digite su correo electronico" type="email" />
+                </div>*@
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Telefono / Celular <span style="color: red;"> *</span></strong> </label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="number" class="form-control" id="TelefonoContacto" name="TelefonoContacto" placeholder="Digite su numero de celular" />
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label>
+                    <strong>
+                        Cesar - Municipio donde vive
+                        <span style="color: red;"> *</span>
+                    </strong>
+                </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="Municipios" name="Municipios">
+                    <option value="">Seleccionar</option>
+                    <option value="Aguachica">Aguachica</option>
+                    <option value="Agustín Codazzi">Agustín Codazzi</option>
+                    <option value="Astrea">Astrea</option>
+                    <option value="Becerril">Becerril</option>
+                    <option value="Bosconia">Bosconia</option>
+                    <option value="Chimichagua">Chimichagua</option>
+                    <option value="Chiriguaná">Chiriguaná</option>
+                    <option value="Curumaní">Curumaní</option>
+                    <option value="El Copey">El Copey</option>
+                    <option value="El Paso">El Paso</option>
+                    <option value="Gamarra">Gamarra</option>
+                    <option value="González">González</option>
+                    <option value="La Gloria">La Gloria</option>
+                    <option value="La Jagua de Ibirico">La Jagua de Ibirico</option>
+                    <option value="La Paz">La Paz</option>
+                    <option value="Manaure">Manaure</option>
+                    <option value="Pailitas">Pailitas</option>
+                    <option value="Pelaya">Pelaya</option>
+                    <option value="Pueblo Bello">Pueblo Bello</option>
+                    <option value="Río de Oro">Río de Oro</option>
+                    <option value="San Alberto">San Alberto</option>
+                    <option value="San Diego">San Diego</option>
+                    <option value="San Martín">San Martín</option>
+                    <option value="Tamalameque">Tamalameque</option>
+                    <option value="Valledupar">Valledupar</option>
+                </select>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label>
+                    <strong>
+                        zona
+                        <span style="color: red;"> *</span>
+                    </strong>
+                </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="Zona" name="Zona">
+                    <option value="">Seleccionar</option>
+                    <option value="Rural">Rural</option>
+                    <option value="Urbano">Urbano</option>
+                </select>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label>
+                    <strong>
+                        Ultimo nivel de escolaridad
+                        <span style="color: red;"> *</span>
+                    </strong>
+                </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="NivelEscolaridad" name="NivelEscolaridad">
+                    <option value="">Seleccionar</option>
+                    <option value="Primaria">Primaria</option>
+                    <option value="Bachillerato">Bachillerato</option>
+                    <option value="Técnico">Técnico</option>
+                    <option value="Tecnologia">Tecnologia</option>
+                    <option value="Profesional">Profesional</option>
+                    <option value="Especialización">Especialización</option>
+                    <option value="Maestria">Maestria</option>
+                    <option value="Doctorado">Doctorado</option>
+                    <option value="No tengo estudios">No tengo estudios</option>
+                </select>
+            </div>
+
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Profesión <span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="text" class="form-control" id="Profesion" name="Profesion" placeholder="Digite el nombre de su profesion" />
+                <span asp-validation-for="NombresPasaporte" class="text-danger"></span>
+            </div>
+
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label>
+                    <strong>
+                        ¿En que Ambiente Lúdico Pedagógico se desempeña mejor?
+                        <span style="color: red;"> *</span>
+                    </strong>
+                </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="pais" name="pais">
+                    <option value="">Seleccionar</option>
+                    <option value="Colombia se recrea">Colombia se recrea</option>
+                    <option value="Colombia se expresa">Colombia se expresa</option>
+                    <option value="Colombia emprendedora">Colombia emprendedora</option>
+                </select>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label>
+                    <strong>
+                        Ambiente Lúdico Pedagógico
+                        <span style="color: red;"> *</span>
+                    </strong>
+                </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="ambienteLudico" name="ambienteLudico" disabled>
+
+                    <option value="">Seleccionar ambiente lúdico primero</option>
+                </select>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label>
+                    <strong>
+                        Ambiente Lúdico Pedagógico
+                        <span style="color: red;"> *</span>
+                    </strong>
+                </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="informacion" name="informacion" disabled>
+                    <option value="">Seleccionar ambiente lúdico primero</option>
+                </select>
+            </div>
+
+
+
+    </form>
+
+
+
+</div>
+
+
+
+<script>
+    const opcionesPaises = {
+        "Colombia se recrea": [
+            "Seleccionar",
+            "Juegos Autóctonos",
+            "Juegos Tradicionales",
+            "Juguetes",
+            "Actividad física Recreativa"
+        ],
+        "Colombia se expresa": [
+            "Seleccionar",
+            "Expresión Corporal",
+            "Expresión Musical"
+
+        ],
+        "Colombia emprendedora": [
+            "Seleccionar",
+            "Expresion plastica",
+            "Procesos artesanales"
+        ]
+    };
+
+    const opcionesInformacion = {
+        "Juegos Autóctonos": [
+            "Seleccionar",
+            "Juegos inventados o creados (región)"
+        ],
+        "Juegos Tradicionales": [
+            "Seleccionar",
+            "Juegos tradicionales de mesa",
+            "Juegos tradicionales de calle",
+            "Juegos de mano"
+        ],
+        "Juguetes": [
+            "Seleccionar",
+            "Talleres de construcción de juguetes",
+            "Juguetes Intergeneracionales"
+        ],
+        "Actividad física Recreativa": [
+            "Seleccionar",
+            "Revista o coreografía",
+            "Circuito de retos"
+        ],
+        "Expresión Corporal": [
+            "Seleccionar",
+            "Danza",
+            "Coreografia"
+        ],
+        "Expresión Musical": [
+            "Seleccionar",
+            "Rondas y canciones tradicionales",
+            "Coplas y versos",
+            "Interpretación de instrumentos musicales"
+        ],
+        //"Argentina Emprendedora": [
+        //    "Información 16",
+        //    "Información 17",
+        //    "Información 18"
+        //],
+        "Expresion plastica": [
+            "Seleccionar",
+            "Modelado con arcilla",
+            "Modelado con plastilina",
+            "Pintura (Óleo, Acuarelas, Tempera, etc)",
+            "Collage",
+            "Escultura",
+            "Taller de expresión plástica"
+        ],
+        "Procesos artesanales": [
+            "Seleccionar",
+            "Trabajos en fibras",
+            "Naturales trabajos en barro tejido",
+            "Trabajos en madera",
+            "Muñequeria",
+            "Taller de procesos artesanales"
+        ]
+    };
+
+    function cargarOpciones(selectId, opciones) {
+        const select = document.getElementById(selectId);
+        select.innerHTML = "";
+        opciones.forEach((opcion) => {
+            const option = document.createElement("option");
+            option.value = opcion;
+            option.textContent = opcion;
+            select.appendChild(option);
+        });
+    }
+
+    function cargarInformacion() {
+        const selectAmbienteLudico = document.getElementById("ambienteLudico");
+        const selectInformacion = document.getElementById("informacion");
+        const selectedAmbienteLudico = selectAmbienteLudico.value;
+
+        selectInformacion.innerHTML = "";
+        if (selectedAmbienteLudico !== "") {
+            const opciones = opcionesInformacion[selectedAmbienteLudico];
+            cargarOpciones("informacion", opciones);
+        } else {
+            const option = document.createElement("option");
+            option.textContent = "Seleccionar ambiente lúdico primero";
+            selectInformacion.appendChild(option);
+        }
+    }
+
+    document.getElementById("pais").addEventListener("change", function () {
+        const selectedPais = this.value;
+        const selectAmbienteLudico = document.getElementById("ambienteLudico");
+
+        if (selectedPais !== "") {
+            const opciones = opcionesPaises[selectedPais];
+            cargarOpciones("ambienteLudico", opciones);
+            selectAmbienteLudico.disabled = false;
+        } else {
+            selectAmbienteLudico.innerHTML = "<option value=''>Seleccionar país primero</option>";
+            document.getElementById("informacion").innerHTML = "<option value=''>Seleccionar ambiente lúdico primero</option>";
+            selectAmbienteLudico.disabled = true;
+            document.getElementById("informacion").disabled = true;
+        }
+    });
+
+    document.getElementById("ambienteLudico").addEventListener("change", function () {
+        const selectedAmbienteLudico = this.value;
+        const selectInformacion = document.getElementById("informacion");
+
+        if (selectedAmbienteLudico !== "") {
+            const opciones = opcionesInformacion[selectedAmbienteLudico];
+            cargarOpciones("informacion", opciones);
+            selectInformacion.disabled = false;
+        } else {
+            selectInformacion.innerHTML = "<option value=''>Seleccionar ambiente lúdico primero</option>";
+            selectInformacion.disabled = true;
+        }
+    });
+
+    function cambiarInput() {
+        var selectAmbientes = document.getElementById("ambientesSelect");
+        var inputAmbiente = document.getElementById("ambienteLudicoInput");
+
+        if (selectAmbientes.value !== "") {
+            // Si se seleccionó una opción en el select, habilitamos el input y lo mostramos
+            inputAmbiente.disabled = false;
+            inputAmbiente.style.display = "block";
+        } else {
+            // Si no se seleccionó ninguna opción en el select, deshabilitamos el input y lo ocultamos
+            inputAmbiente.disabled = true;
+            inputAmbiente.style.display = "none";
+        }
+    }
+
+
+
+
+</script>
+
+<STYLE>
+    .hideable {
+        position: relative;
+        visibility: visible;
+    }
+</STYLE>
+<style type="text/css" media="screen">
+    :root {
+        --color-green: #00a878;
+        --color-red: #fe5e41;
+        --color-button: #fdffff;
+        --color-black: #000;
+    }
+
+    .switch-button {
+        display: inline-block;
+    }
+
+        .switch-button .switch-button__checkbox {
+            display: none;
+        }
+
+        .switch-button .switch-button__label {
+            background-color: var(--color-red);
+            width: 5rem;
+            height: 3rem;
+            border-radius: 3rem;
+            display: inline-block;
+            position: relative;
+        }
+
+            .switch-button .switch-button__label:before {
+                transition: .2s;
+                display: block;
+                position: absolute;
+                width: 3rem;
+                height: 3rem;
+                background-color: var(--color-button);
+                content: '';
+                border-radius: 50%;
+                box-shadow: inset 0px 0px 0px 1px var(--color-black);
+            }
+
+        .switch-button .switch-button__checkbox:checked + .switch-button__label {
+            background-color: var(--color-green);
+        }
+
+            .switch-button .switch-button__checkbox:checked + .switch-button__label:before {
+                transform: translateX(2rem);
+            }
+</style>
+<SCRIPT>
+    function Mostrar_Ocultar(show) {
+        if (document.layers)
+            /*aqui se cambian los valores 'show' y 'hide' para cultarlo o mostrarlo
+            aqui la variable  (hide) esta en show para ver los campos
+            document.contenido.visibility = ****variable(hide)**** ? ****estado('show') ****y despues *****: 'hide'; */
+            document.contenido.visibility = show ? 'show' : 'hide';
+        else {
+            var g = document.all ? document.all.contenido :
+                document.getElementById('contenido');
+            g.style.visibility = show ? 'visible' : 'hidden';
+        }
+    }
+</SCRIPT>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#hide").on('click', function () {
+            $("#element").hide();
+            return false;
+        });
+
+        $("#show").on('click', function () {
+            $("#element").show();
+            return false;
+        });
+    });
+</script>
+
+<br />
+<br />
+
+
+<!--<div class="">
+
+    <form id="FormCitasMedicasDeportiva4" name="FormCitasMedicasDeportiva4">
+
+
+
+        <div>
+            <label><strong>¿La cita es para un menor de edad?</strong> </label>
+            <p><a class="btn btn-outline-primary" href="#" id="show"><i class="fa fa-eye"></i> Si</a></p>
+            <div id="content" class="">
+                <div id="element" style="display: none;">
+                    <div id="close"><a class="btn btn-outline-primary mr-auto" href="#" id="hide" title="Cerrar"><i class="fa fa-close"></i> No</a></div>
+                    <br />
+
+                    <div class="">
+
+                        <h1 class="p-1 mb-2 text-white" style="background-color: #006068; text-align: center; "><strong>DATOS DEL ACOMPAÑANTE DEL MENOR DE EDAD</strong></h1>
+                        <hr width=100% align="right" size=200 color="black">
+                        <div>
+                            <label><strong>Cual es su parentesco con el menor de edad Documento</strong> </label>
+                            <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="ParentescoMenor" name="ParentescoMenor">
+                                <option value="">Seleccionar</option>
+                                <option value="Madre">Madre</option>
+                                <option value="Padre">Padre</option>
+                                <option value="Tutor Legal">Tutor Legal</option>
+
+                            </select>
+                        </div>
+
+                        <div>
+                            <label><strong>Nombre del responsable del menor</strong></label>
+                            <input style="border: black; border-width: 1px; border-style: solid;" type="text" class="form-control" id="CuantosMenores" name="CuantosMenores" placeholder="Digite su nombre completo" />
+                        </div>
+
+                        <br />
+
+
+
+
+                    </div>
+                </div>
+            </div>-->
+@*<div class="form-check">
+        <input class="form-check-input" value="SI" type="radio" name="Accion" id="MenoresEdadPasaporte" ONCLICK="Mostrar_Ocultar(this.checked)" checked >
+        <label class="form-check-label" for="flexRadioDefault1">
+            SI
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" value="NO" type="radio" name="Accion" id="MenoresEdadPasaporte"  >
+        <label class="form-check-label" for="flexRadioDefault1">
+            NO
+        </label>
+    </div>*@
+
+<!--</div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">
+                <strong>
+                    AVISO DE PRIVACIDAD: El Ministerio del Deporte informa que los datos personales por usted suministrados serán tratados de acuerdo con la legislación vigente y nuestra política de protección de datos vigente, la cual está disponible en
+                    <A HREF="https://www.mindeporte.gov.co/recursos_user/2020/Jur%C3%ADdica/Agosto/POLITICA_PROTECCION_DATOS_PERSONALES_MINDEPORTE.pdf" target="_blank">POLÍTICA DE PROTECCIÓN DE DATOS PERSONALES</A>
+
+                </strong>
+                <br />
+                <br />
+
+            </label>
+
+        </div>
+
+
+
+    </form>
+
+
+
+
+</div>-->
+@*<div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+        <label class="form-check-label" for="inlineCheckbox2">
+            <strong>
+                AVISO DE PRIVACIDAD: El Ministerio del Deporte informa que los datos personales por usted suministrados serán tratados de acuerdo con la legislación vigente y nuestra política de protección de datos vigente, la cual está disponible en
+                <A HREF="https://www.mindeporte.gov.co/recursos_user/2020/Jur%C3%ADdica/Agosto/POLITICA_PROTECCION_DATOS_PERSONALES_MINDEPORTE.pdf" target="_blank">POLÍTICA DE PROTECCIÓN DE DATOS PERSONALES</A>
+
+            </strong>
+            <br />
+            <br />
+
+        </label>
+
+    </div>
+
+
+    <div class="col-xs-6 col-sm-6 col-md-6">
+        <button type="button" onclick="Createobj()" class="btn btn-block btn-outline-primary btn-rounded btn-outline mt-4" id="SavePoliticaSocial">Guardar</button>
+    </div>*@
+<div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" onchange="activarBoton()">
+    <label class="form-check-label" for="inlineCheckbox2">
+        <strong>
+            AVISO DE PRIVACIDAD: El Ministerio del Deporte informa que los datos personales por usted suministrados serán tratados de acuerdo con la legislación vigente y nuestra política de protección de datos vigente, la cual está disponible en
+            <a href="https://www.mindeporte.gov.co/recursos_user/2020/Jur%C3%ADdica/Agosto/POLITICA_PROTECCION_DATOS_PERSONALES_MINDEPORTE.pdf" target="_blank">POLÍTICA DE PROTECCIÓN DE DATOS PERSONALES</a>
+        </strong>
+        <br />
+        <br />
+    </label>
+</div>
+
+<div class="col-xs-6 col-sm-6 col-md-6">
+    <button type="button" onclick="Createobj()" class="btn btn-block btn-outline-primary btn-rounded btn-outline mt-4" id="SavePoliticaSocial" disabled>Guardar</button>
+</div>
+
+<script>
+    function activarBoton() {
+        var checkbox = document.getElementById("inlineCheckbox2");
+        var botonGuardar = document.getElementById("SavePoliticaSocial");
+
+        // Si el checkbox está seleccionado, habilitar el botón; de lo contrario, deshabilitarlo.
+        botonGuardar.disabled = !checkbox.checked;
+    }
+</script>
+
+
+
+<footer id="footer">
+
+    <div class="">
+        <div class="container">
+            <div class="">
+                <div id="copyright">
+
+
+
+                    <!-- BEGIN: Custom advanced (www.pluginaria.com) -->
+                    <div style="text-align: center;">
+                        <hr style="color: #1051eae2;">
+                        <span style="color: #0d3c61;">
+                            <strong>Horario de Atención:</strong>
+                        </span>&nbsp;
+                        <span style="color: #000000;">Lunes a Viernes de 07:45 am - 12:45 pm y 02:45 pm - 05:45 pm</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #000000;">
+                            <span style="color: #0d3c61;">
+                                <strong style="text-align: center;">Dirección:</strong>
+                            </span>&nbsp;Calle 16 # 12 - 120 Edificio
+                            Alfonso López Michelsen Valledupar - Cesar - Colombia
+                        </span>
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #000000;"></span>
+                        <span>
+                            <span style="color: #0d3c61;">
+                                <strong>
+                                    Líneas de Atención a la
+                                    Ciudadanía:
+                                </strong>
+                            </span>&nbsp;<span style="color: #000000;">
+                                01 8000 954 099 / (575)
+                                5748230
+                            </span>
+                        </span>
+                    </div>
+                    <div style="text-align: justify;">
+
+                        <div style="text-align: center;">
+                            <span style="color: #000000;">
+                                <strong>
+                                    <span style="color: #0d3c61;">Correo Institucional:</span>
+                                    &nbsp;
+                                </strong>
+                                <a href="mailto:contactenos@cesar.gov.co" style="color: #000000;">contactenos@cesar.gov.co</a>
+                                &nbsp;
+                            </span>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="color: #000000;">
+                                <span style="color: #0d3c61;">
+                                    <strong>Código Postal:</strong>&nbsp;
+                                </span>200001
+                            </span>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="color: #000000;">
+                                <span style="color: #0d3c61;">
+                                    <strong>Nit:</strong>
+                                    &nbsp;
+                                </span>892399999-1
+                            </span>
+                        </div>
+                        <div style="text-align: center;">
+                            <strong style="color: #0d3c61;">
+                                <a href="https://cesar.gov.co/d/index.php/es/2-uncategorised/2856-artpolpriv"
+                                   style="color: #0d3c61;">
+                                    Políticas
+                                    de Privacidad y Condiciones de Uso de la Información
+                                </a>
+                            </strong>
+                        </div>
+                    </div>
+                    <div>
+                        &nbsp;&nbsp;
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="~/images/banner_28.png" alt="0000 2020 imggbp 01" style="max-width: 100%;" />
+
+                    </div>
+                    <br><br>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</footer>
+
+
+
+
+<style>
+
+    #footer {
+        text-align: center;
+        width: 100%;
+        background-color: #f5f5f5;
+        padding: 20px;
+    }
+
+        #footer img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #footer div {
+            max-width: 100%;
+        }
+</style>
+
+

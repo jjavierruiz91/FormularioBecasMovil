@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "Agregar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script defer src="~/Scripts/APP/AgendarCitas/AgendarCitas.js"></script>
+<h2><strong>Horario Agendamiento de citas Pasaporte</strong></h2>
+
+<hr width=100% align="right" size=200 color="black">
+
+<div class="row m-0">
+
+    <form id="FormAgendarCitasDeportiva" name="FormAgendarCitasDeportiva">
+
+        <div class="row m-0">
+
+
+            @*<div class="col-xs-4 col-sm-4 col-md-4">
+                <label><strong>Identificación Especialista</strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="CedEspecialistaCitas" name="CedEspecialistaCitas" />
+            </div>*@
+            @*<div class="col-xs-4 col-sm-4 col-md-4">
+                <label><strong>Nombre Especialista</strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="NombrEspecilistaCitas" name="NombrEspecilistaCitas" />
+            </div>*@
+            @*<div class="col-xs-4 col-sm-4 col-md-4">
+                <label><strong>NotificacionCampoCitas Especialista</strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="NotificacionCampoCitas" name="NotificacionCampoCitas" />
+            </div>*@
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <label><strong> Hora Inicio citas</strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="time" class="form-control" id="HoraIniciocitas" name="HoraIniciocitas" value="07:45" />
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <label><strong>Hora Fin Citas</strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="time" class="form-control" id="HoraFinCitas" name="HoraFinCitas" value="16:45" />
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <label><strong>Numero Citas</strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="number" class="form-control" id="NumCitasAgenda" name="NumCitasAgenda" value="80" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Fecha Citas</strong></label>
+
+                <input name="date_range" style="border: black; border-width: 1px; border-style: solid;" type="text" class="form-control" id="FechaCitas" />
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <button type="button" onclick="AddTest()" class="btn btn-block btn-outline-primary btn-rounded btn-outline mt-4" id="btnadd" name="btnadd">agregar</button>
+            </div>
+
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="table-responsive row col-xl-12 ">
+            <table class="table" id="datatable-Test">
+                <thead>
+                    <tr class="ColorTabla">
+                        <th>Hora Inicio citas</th>
+                        <th>Hora Fin Citas</th>
+                        <th>Fecha Citas</th>
+                        <th>Numero Citas</th>
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </form>
+    <script>
+      
+         $(function () {
+             $('#FechaCitas').daterangepicker({
+                 "locale": {
+                     "format": "YYYY-MM-DD",
+                     "separator": " a ",
+                     "applyLabel": "Guardar",
+                     "cancelLabel": "Cancelar",
+                     "fromLabel": "Desde",
+                     "toLabel": "Hasta",
+                     "customRangeLabel": "Personalizar",
+                     "daysOfWeek": [
+                         "Do",
+                         "Lu",
+                         "Ma",
+                         "Mi",
+                         "Ju",
+                         "Vi",
+                         "Sa"
+                     ],
+                     "monthNames": [
+                         "Enero",
+                         "Febrero",
+                         "Marzo",
+                         "Abril",
+                         "Mayo",
+                         "Junio",
+                         "Julio",
+                         "Agosto",
+                         "Setiembre",
+                         "Octubre",
+                         "Noviembre",
+                         "Diciembre"
+                     ],
+                     "firstDay": 1
+                 },
+                 "startDate": new Date(),
+                 "startDatelabel": "Inicio",
+                 "endDate": addDays(new Date(), 30),
+                 
+             });
+         });
+
+    </script>
+
+    <div class="col-xs-4 col-sm-4 col-md-4">
+        <button type="button" onclick="Createobj()" class="btn btn-block btn-outline-primary btn-rounded btn-outline mt-4" id="SaveAgendaCita">Guardar</button>
+    </div>
+</div>
+
+

@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BIOMEDICOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AgendaExcepciones">
+          <Key>
+            <PropertyRef Name="IdAgendaExcepciones" />
+          </Key>
+          <Property Name="IdAgendaExcepciones" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EstadoAgendaExcepciones" Type="varchar(max)" />
+          <Property Name="TipoSolicitudAgendaExcepciones" Type="varchar(max)" />
+          <Property Name="TipoDocumentoAgendaExcepciones" Type="varchar(max)" />
+          <Property Name="NumeroDocumentoAgendaExcepciones" Type="bigint" />
+          <Property Name="NombresAgendaExcepciones" Type="varchar(max)" />
+          <Property Name="ApellidosAgendaExcepciones" Type="varchar(max)" />
+          <Property Name="TipoPasaporteAgendaExcepciones" Type="varchar(max)" />
+          <Property Name="FechaAgendaExcepciones" Type="datetime" />
+          <Property Name="ObservacionesAgendaExcepciones" Type="varchar(max)" />
+          <Property Name="FechaRegistroAgendaExcepciones" Type="datetime" />
+          <Property Name="FechaEstadoAgendaExcepciones" Type="datetime" />
+          <Property Name="UsuarioRegistraAgendaExcepciones" Type="varchar(max)" />
+          <Property Name="UsuarioEstadoAgendaExcepciones" Type="varchar(max)" />
+          <Property Name="DireccionIpAgendaExcepciones" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="AgendarCitas">
+          <Key>
+            <PropertyRef Name="IdAgendarCitas" />
+          </Key>
+          <Property Name="IdAgendarCitas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CedSucursalCitas" Type="varchar(max)" />
+          <Property Name="HoraIniciocitas" Type="datetime" />
+          <Property Name="HoraFinCitas" Type="datetime" />
+          <Property Name="FechaCitas" Type="datetime" />
+          <Property Name="NumCitasAgenda" Type="int" />
+        </EntityType>
+        <EntityType Name="ASignarPermisos">
+          <Key>
+            <PropertyRef Name="IdPermiso" />
+          </Key>
+          <Property Name="IdPermiso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodPermiso" Type="int" Nullable="false" />
+          <Property Name="CodRol" Type="int" />
+        </EntityType>
+        <EntityType Name="BecasMovil">
+          <Key>
+            <PropertyRef Name="IdBecasMovil" />
+          </Key>
+          <Property Name="IdBecasMovil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreBecasMovil" Type="varchar(max)" />
+          <Property Name="ApellidosBecasMovil" Type="varchar(max)" />
+          <Property Name="TipoDocumento" Type="varchar(max)" />
+          <Property Name="NumeroDocumento" Type="bigint" />
+          <Property Name="TipoDocumentoPdf" Type="varchar(max)" />
+          <Property Name="CorreoElectronico" Type="varchar(max)" />
+          <Property Name="NumeroContacto" Type="varchar(max)" />
+          <Property Name="Direccion" Type="varchar(max)" />
+          <Property Name="NivelSisbenPdf" Type="varchar(max)" />
+          <Property Name="NivelEscolaridadPdf" Type="varchar(max)" />
+          <Property Name="MunicipioResidencia" Type="varchar(max)" />
+          <Property Name="LugarNacimiento" Type="varchar(max)" />
+          <Property Name="TipoPoblacion" Type="varchar(max)" />
+          <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="TipoSisben" Type="varchar(max)" />
+          <Property Name="TipoEscolaridad" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Permisos">
+          <Key>
+            <PropertyRef Name="IdPermiso" />
+          </Key>
+          <Property Name="IdPermiso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodPermiso" Type="int" />
+          <Property Name="NomPermiso" Type="varchar(max)" />
+          <Property Name="EtiquetaPermiso" Type="varchar(max)" />
+          <Property Name="Url" Type="varchar(max)" />
+          <Property Name="DesPermiso" Type="varchar(max)" />
+          <Property Name="TipoPermiso" Type="int" />
+          <Property Name="PadrePermiso" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="CodRol" />
+          </Key>
+          <Property Name="CodRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomRol" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Sucursal">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdSucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodSucursal" Type="int" />
+          <Property Name="EstadoSucursal" Type="varchar(max)" />
+          <Property Name="EspecialidadSucursal" Type="varchar(max)" />
+          <Property Name="Direcccion" Type="varchar(max)" />
+          <Property Name="Telefono" Type="nchar" MaxLength="30" />
+          <Property Name="Correo" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="TipoPermiso">
+          <Key>
+            <PropertyRef Name="CodPermiso" />
+          </Key>
+          <Property Name="CodPermiso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescPermiso" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CedUsuario" Type="nchar" MaxLength="20" />
+          <Property Name="NomUsuario" Type="varchar(max)" />
+          <Property Name="ApeUsuario" Type="varchar(max)" />
+          <Property Name="Telefono" Type="nchar" MaxLength="10" />
+          <Property Name="Correo" Type="varchar(max)" />
+          <Property Name="Password" Type="varchar(max)" />
+          <Property Name="CodRol" Type="int" />
+        </EntityType>
+        <Association Name="FK_ASignar permisos_Permisos1">
+          <End Role="Permisos" Type="Self.Permisos" Multiplicity="1" />
+          <End Role="ASignarPermisos" Type="Self.ASignarPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permisos">
+              <PropertyRef Name="IdPermiso" />
+            </Principal>
+            <Dependent Role="ASignarPermisos">
+              <PropertyRef Name="CodPermiso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASignar permisos_Rol1">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="ASignarPermisos" Type="Self.ASignarPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="CodRol" />
+            </Principal>
+            <Dependent Role="ASignarPermisos">
+              <PropertyRef Name="CodRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permisos_TipoPermiso">
+          <End Role="TipoPermiso" Type="Self.TipoPermiso" Multiplicity="0..1" />
+          <End Role="Permisos" Type="Self.Permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPermiso">
+              <PropertyRef Name="CodPermiso" />
+            </Principal>
+            <Dependent Role="Permisos">
+              <PropertyRef Name="TipoPermiso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Rol1">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="CodRol" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="CodRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BIOMEDICOModelStoreContainer">
+          <EntitySet Name="AgendaExcepciones" EntityType="Self.AgendaExcepciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgendarCitas" EntityType="Self.AgendarCitas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ASignarPermisos" EntityType="Self.ASignarPermisos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BecasMovil" EntityType="Self.BecasMovil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permisos" EntityType="Self.Permisos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sucursal" EntityType="Self.Sucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoPermiso" EntityType="Self.TipoPermiso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ASignar permisos_Permisos1" Association="Self.FK_ASignar permisos_Permisos1">
+            <End Role="Permisos" EntitySet="Permisos" />
+            <End Role="ASignarPermisos" EntitySet="ASignarPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASignar permisos_Rol1" Association="Self.FK_ASignar permisos_Rol1">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="ASignarPermisos" EntitySet="ASignarPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permisos_TipoPermiso" Association="Self.FK_Permisos_TipoPermiso">
+            <End Role="TipoPermiso" EntitySet="TipoPermiso" />
+            <End Role="Permisos" EntitySet="Permisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Rol1" Association="Self.FK_Usuarios_Rol1">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BIOMEDICOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ASignarPermisos">
+          <Key>
+            <PropertyRef Name="IdPermiso" />
+          </Key>
+          <Property Name="IdPermiso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodPermiso" Type="Int32" Nullable="false" />
+          <Property Name="CodRol" Type="Int32" />
+          <NavigationProperty Name="Permisos" Relationship="Self.FK_ASignar_permisos_Permisos1" FromRole="ASignarPermisos" ToRole="Permisos" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_ASignar_permisos_Rol1" FromRole="ASignarPermisos" ToRole="Rol" />
+        </EntityType>
+        <EntityType Name="Permisos">
+          <Key>
+            <PropertyRef Name="IdPermiso" />
+          </Key>
+          <Property Name="IdPermiso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodPermiso" Type="Int32" />
+          <Property Name="NomPermiso" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EtiquetaPermiso" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DesPermiso" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TipoPermiso" Type="Int32" />
+          <Property Name="PadrePermiso" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ASignarPermisos" Relationship="Self.FK_ASignar_permisos_Permisos1" FromRole="Permisos" ToRole="ASignarPermisos" />
+          <NavigationProperty Name="TipoPermiso1" Relationship="Self.FK_Permisos_TipoPermiso" FromRole="Permisos" ToRole="TipoPermiso" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="CodRol" />
+          </Key>
+          <Property Name="CodRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomRol" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ASignarPermisos" Relationship="Self.FK_ASignar_permisos_Rol1" FromRole="Rol" ToRole="ASignarPermisos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Rol1" FromRole="Rol" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="TipoPermiso">
+          <Key>
+            <PropertyRef Name="CodPermiso" />
+          </Key>
+          <Property Name="CodPermiso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescPermiso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Permisos" Relationship="Self.FK_Permisos_TipoPermiso" FromRole="TipoPermiso" ToRole="Permisos" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CedUsuario" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="NomUsuario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ApeUsuario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Correo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CodRol" Type="Int32" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Usuarios_Rol1" FromRole="Usuarios" ToRole="Rol" />
+        </EntityType>
+        <Association Name="FK_ASignar_permisos_Permisos1">
+          <End Role="Permisos" Type="Self.Permisos" Multiplicity="1" />
+          <End Role="ASignarPermisos" Type="Self.ASignarPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permisos">
+              <PropertyRef Name="IdPermiso" />
+            </Principal>
+            <Dependent Role="ASignarPermisos">
+              <PropertyRef Name="CodPermiso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASignar_permisos_Rol1">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="ASignarPermisos" Type="Self.ASignarPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="CodRol" />
+            </Principal>
+            <Dependent Role="ASignarPermisos">
+              <PropertyRef Name="CodRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permisos_TipoPermiso">
+          <End Role="TipoPermiso" Type="Self.TipoPermiso" Multiplicity="0..1" />
+          <End Role="Permisos" Type="Self.Permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPermiso">
+              <PropertyRef Name="CodPermiso" />
+            </Principal>
+            <Dependent Role="Permisos">
+              <PropertyRef Name="TipoPermiso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Rol1">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="CodRol" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="CodRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BIOMEDICOEntities5" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ASignarPermisos" EntityType="Self.ASignarPermisos" />
+          <EntitySet Name="Permisos" EntityType="Self.Permisos" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="TipoPermiso" EntityType="Self.TipoPermiso" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK_ASignar_permisos_Permisos1" Association="Self.FK_ASignar_permisos_Permisos1">
+            <End Role="Permisos" EntitySet="Permisos" />
+            <End Role="ASignarPermisos" EntitySet="ASignarPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASignar_permisos_Rol1" Association="Self.FK_ASignar_permisos_Rol1">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="ASignarPermisos" EntitySet="ASignarPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permisos_TipoPermiso" Association="Self.FK_Permisos_TipoPermiso">
+            <End Role="TipoPermiso" EntitySet="TipoPermiso" />
+            <End Role="Permisos" EntitySet="Permisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Rol1" Association="Self.FK_Usuarios_Rol1">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <EntitySet Name="Sucursal" EntityType="BIOMEDICOModel.Sucursal" />
+          <EntitySet Name="AgendaExcepciones" EntityType="BIOMEDICOModel.AgendaExcepciones" />
+          <EntitySet Name="AgendarCitas" EntityType="BIOMEDICOModel.AgendarCitas" />
+          <EntitySet Name="BecasMovil" EntityType="BIOMEDICOModel.BecasMovil" />
+          </EntityContainer>
+        <EntityType Name="Sucursal">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodSucursal" Type="Int32" />
+          <Property Name="EstadoSucursal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EspecialidadSucursal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Direcccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Correo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AgendaExcepciones">
+          <Key>
+            <PropertyRef Name="IdAgendaExcepciones" />
+          </Key>
+          <Property Name="IdAgendaExcepciones" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EstadoAgendaExcepciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TipoSolicitudAgendaExcepciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDocumentoAgendaExcepciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDocumentoAgendaExcepciones" Type="Int64" />
+          <Property Name="NombresAgendaExcepciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidosAgendaExcepciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TipoPasaporteAgendaExcepciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAgendaExcepciones" Type="DateTime" Precision="3" />
+          <Property Name="ObservacionesAgendaExcepciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaRegistroAgendaExcepciones" Type="DateTime" Precision="3" />
+          <Property Name="FechaEstadoAgendaExcepciones" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioRegistraAgendaExcepciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioEstadoAgendaExcepciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionIpAgendaExcepciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AgendarCitas">
+          <Key>
+            <PropertyRef Name="IdAgendarCitas" />
+          </Key>
+          <Property Name="IdAgendarCitas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CedSucursalCitas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HoraIniciocitas" Type="DateTime" Precision="3" />
+          <Property Name="HoraFinCitas" Type="DateTime" Precision="3" />
+          <Property Name="FechaCitas" Type="DateTime" Precision="3" />
+          <Property Name="NumCitasAgenda" Type="Int32" />
+        </EntityType>
+        <EntityType Name="BecasMovil">
+          <Key>
+            <PropertyRef Name="IdBecasMovil" />
+          </Key>
+          <Property Name="IdBecasMovil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreBecasMovil" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidosBecasMovil" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDocumento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDocumento" Type="Int64" />
+          <Property Name="TipoDocumentoPdf" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroContacto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NivelSisbenPdf" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NivelEscolaridadPdf" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MunicipioResidencia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LugarNacimiento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TipoPoblacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="TipoSisben" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TipoEscolaridad" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BIOMEDICOModelStoreContainer" CdmEntityContainer="BIOMEDICOEntities5">
+          <EntitySetMapping Name="ASignarPermisos">
+            <EntityTypeMapping TypeName="BIOMEDICOModel.ASignarPermisos">
+              <MappingFragment StoreEntitySet="ASignarPermisos">
+                <ScalarProperty Name="IdPermiso" ColumnName="IdPermiso" />
+                <ScalarProperty Name="CodPermiso" ColumnName="CodPermiso" />
+                <ScalarProperty Name="CodRol" ColumnName="CodRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permisos">
+            <EntityTypeMapping TypeName="BIOMEDICOModel.Permisos">
+              <MappingFragment StoreEntitySet="Permisos">
+                <ScalarProperty Name="IdPermiso" ColumnName="IdPermiso" />
+                <ScalarProperty Name="CodPermiso" ColumnName="CodPermiso" />
+                <ScalarProperty Name="NomPermiso" ColumnName="NomPermiso" />
+                <ScalarProperty Name="EtiquetaPermiso" ColumnName="EtiquetaPermiso" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="DesPermiso" ColumnName="DesPermiso" />
+                <ScalarProperty Name="TipoPermiso" ColumnName="TipoPermiso" />
+                <ScalarProperty Name="PadrePermiso" ColumnName="PadrePermiso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="BIOMEDICOModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="CodRol" ColumnName="CodRol" />
+                <ScalarProperty Name="NomRol" ColumnName="NomRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPermiso">
+            <EntityTypeMapping TypeName="BIOMEDICOModel.TipoPermiso">
+              <MappingFragment StoreEntitySet="TipoPermiso">
+                <ScalarProperty Name="CodPermiso" ColumnName="CodPermiso" />
+                <ScalarProperty Name="DescPermiso" ColumnName="DescPermiso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="BIOMEDICOModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="CedUsuario" ColumnName="CedUsuario" />
+                <ScalarProperty Name="NomUsuario" ColumnName="NomUsuario" />
+                <ScalarProperty Name="ApeUsuario" ColumnName="ApeUsuario" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CodRol" ColumnName="CodRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sucursal">
+            <EntityTypeMapping TypeName="BIOMEDICOModel.Sucursal">
+              <MappingFragment StoreEntitySet="Sucursal">
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direcccion" ColumnName="Direcccion" />
+                <ScalarProperty Name="EspecialidadSucursal" ColumnName="EspecialidadSucursal" />
+                <ScalarProperty Name="EstadoSucursal" ColumnName="EstadoSucursal" />
+                <ScalarProperty Name="CodSucursal" ColumnName="CodSucursal" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgendaExcepciones">
+            <EntityTypeMapping TypeName="BIOMEDICOModel.AgendaExcepciones">
+              <MappingFragment StoreEntitySet="AgendaExcepciones">
+                <ScalarProperty Name="DireccionIpAgendaExcepciones" ColumnName="DireccionIpAgendaExcepciones" />
+                <ScalarProperty Name="UsuarioEstadoAgendaExcepciones" ColumnName="UsuarioEstadoAgendaExcepciones" />
+                <ScalarProperty Name="UsuarioRegistraAgendaExcepciones" ColumnName="UsuarioRegistraAgendaExcepciones" />
+                <ScalarProperty Name="FechaEstadoAgendaExcepciones" ColumnName="FechaEstadoAgendaExcepciones" />
+                <ScalarProperty Name="FechaRegistroAgendaExcepciones" ColumnName="FechaRegistroAgendaExcepciones" />
+                <ScalarProperty Name="ObservacionesAgendaExcepciones" ColumnName="ObservacionesAgendaExcepciones" />
+                <ScalarProperty Name="FechaAgendaExcepciones" ColumnName="FechaAgendaExcepciones" />
+                <ScalarProperty Name="TipoPasaporteAgendaExcepciones" ColumnName="TipoPasaporteAgendaExcepciones" />
+                <ScalarProperty Name="ApellidosAgendaExcepciones" ColumnName="ApellidosAgendaExcepciones" />
+                <ScalarProperty Name="NombresAgendaExcepciones" ColumnName="NombresAgendaExcepciones" />
+                <ScalarProperty Name="NumeroDocumentoAgendaExcepciones" ColumnName="NumeroDocumentoAgendaExcepciones" />
+                <ScalarProperty Name="TipoDocumentoAgendaExcepciones" ColumnName="TipoDocumentoAgendaExcepciones" />
+                <ScalarProperty Name="TipoSolicitudAgendaExcepciones" ColumnName="TipoSolicitudAgendaExcepciones" />
+                <ScalarProperty Name="EstadoAgendaExcepciones" ColumnName="EstadoAgendaExcepciones" />
+                <ScalarProperty Name="IdAgendaExcepciones" ColumnName="IdAgendaExcepciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgendarCitas">
+            <EntityTypeMapping TypeName="BIOMEDICOModel.AgendarCitas">
+              <MappingFragment StoreEntitySet="AgendarCitas">
+                <ScalarProperty Name="NumCitasAgenda" ColumnName="NumCitasAgenda" />
+                <ScalarProperty Name="FechaCitas" ColumnName="FechaCitas" />
+                <ScalarProperty Name="HoraFinCitas" ColumnName="HoraFinCitas" />
+                <ScalarProperty Name="HoraIniciocitas" ColumnName="HoraIniciocitas" />
+                <ScalarProperty Name="CedSucursalCitas" ColumnName="CedSucursalCitas" />
+                <ScalarProperty Name="IdAgendarCitas" ColumnName="IdAgendarCitas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BecasMovil">
+            <EntityTypeMapping TypeName="BIOMEDICOModel.BecasMovil">
+              <MappingFragment StoreEntitySet="BecasMovil">
+                <ScalarProperty Name="TipoEscolaridad" ColumnName="TipoEscolaridad" />
+                <ScalarProperty Name="TipoSisben" ColumnName="TipoSisben" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="TipoPoblacion" ColumnName="TipoPoblacion" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="MunicipioResidencia" ColumnName="MunicipioResidencia" />
+                <ScalarProperty Name="NivelEscolaridadPdf" ColumnName="NivelEscolaridadPdf" />
+                <ScalarProperty Name="NivelSisbenPdf" ColumnName="NivelSisbenPdf" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="NumeroContacto" ColumnName="NumeroContacto" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="TipoDocumentoPdf" ColumnName="TipoDocumentoPdf" />
+                <ScalarProperty Name="NumeroDocumento" ColumnName="NumeroDocumento" />
+                <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
+                <ScalarProperty Name="ApellidosBecasMovil" ColumnName="ApellidosBecasMovil" />
+                <ScalarProperty Name="NombreBecasMovil" ColumnName="NombreBecasMovil" />
+                <ScalarProperty Name="IdBecasMovil" ColumnName="IdBecasMovil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

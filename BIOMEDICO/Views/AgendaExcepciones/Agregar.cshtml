@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewBag.Title = "Agregar";
+}
+<script defer src="~/Scripts/APP/AgendaExcepciones/AgendaExcepciones.js"></script>
+<h1 class="p-1 mb-2 text-white" style="background-color: #006068; text-align: center; "><strong>SOLICITUD DE TRAMITE PASAPORTE - AGENDA EXCEPCIONES </strong></h1>
+<hr width=100% align="right" size=200 color="black">
+
+
+<div class="row m-0">
+
+    <form id="FormCitasMedicasDeportiva" name="FormCitasMedicasDeportiva">
+
+        <div class="row m-0">
+
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Tipo Documento <span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="TipoDocumentoAgendaExcepciones" name="TipoDocumentoAgendaExcepciones">
+                    <option value="">Seleccionar</option>
+                    <option value="Cedula de Ciudadania">Cedula de Ciudadania</option>
+                    <option value="Registro Civil">Registro Civil</option>
+                    <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                    <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Numero Documento <span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="number" class="form-control" id="NumeroDocumentoAgendaExcepciones" name="NumeroDocumentoAgendaExcepciones" placeholder="Digite su numero de documento" required onchange="ValidarCedula()" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Tipo Solicitud <span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="TipoSolicitudAgendaExcepciones" name="TipoSolicitudAgendaExcepciones">
+                    <option value="">Seleccionar</option>
+                    <option value="Pasaporte Primera Vez">Pasaporte Primera Vez</option>
+                    <option value="Renovacion Pasaporte">Renovacion Pasaporte</option>
+
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Tipo Pasaporte <span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="TipoPasaporteAgendaExcepciones" name="TipoPasaporteAgendaExcepciones">
+                    <option value="">Seleccionar</option>
+                    <option value="Pasaporte Ordinario">Pasaporte Ordinario ($ 271.000)Pesos colombianos</option>
+                    <option value="Pasaporte Ejecutivo">Pasaporte Ejecutivo ($ 361.000)Pesos colombianos</option>
+                    <option value="Pasaporte Emergencia">Pasaporte Emergencia ($ 317.000)Pesos colombianos</option>
+
+                </select>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Nombres <span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="text" class="form-control" id="NombresAgendaExcepciones" name="NombresAgendaExcepciones" placeholder="Digite su nombre completo" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Apellidos<span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="text" class="form-control" id="ApellidosAgendaExcepciones" name="ApellidosAgendaExcepciones" placeholder="Digite sus apellidos completos" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Fecha Registro<span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="date" class="form-control" id="FechaAgendaExcepciones" name="FechaAgendaExcepciones" placeholder="Digite la fecha de agenda" />
+            </div>
+            
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <label><strong>Observaciones<span style="color: red;"> *</span></strong> </label>
+                <textarea style="border: black; border-width: 1px; border-style: solid;" name="textarea" rows="10" cols="50" class="form-control" id="ObservacionesAgendaExcepciones" placeholder="Digite las Observaciones" type="text" ></textarea>
+         
+            </div>
+
+
+            
+
+
+
+
+        </div>
+
+
+
+    </form>
+
+
+
+</div>
+
+
+
+
+<div class="col-xs-6 col-sm-6 col-md-6">
+    <button type="button" onclick="Createobj()" class="btn btn-block btn-outline-primary btn-rounded btn-outline mt-4" id="SaveAgendaExcepciones">Guardar</button>
+</div>
+
+
+<footer id="footer">
+
+    <div class="">
+        <div class="container">
+            <div class="">
+                <div id="copyright">
+
+
+
+                    <!-- BEGIN: Custom advanced (www.pluginaria.com) -->
+                    <div style="text-align: center;">
+                        <hr style="color: #1051eae2;">
+                        <span style="color: #0d3c61;">
+                            <strong>Horario de Atención:</strong>
+                        </span>&nbsp;
+                        <span style="color: #000000;">Lunes a Viernes de 07:45 am - 12:45 pm y 02:45 pm - 05:45 pm</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #000000;">
+                            <span style="color: #0d3c61;">
+                                <strong style="text-align: center;">Dirección:</strong>
+                            </span>&nbsp;Calle 16 # 12 - 120 Edificio
+                            Alfonso López Michelsen Valledupar - Cesar - Colombia
+                        </span>
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #000000;"></span>
+                        <span>
+                            <span style="color: #0d3c61;">
+                                <strong>
+                                    Líneas de Atención a la
+                                    Ciudadanía:
+                                </strong>
+                            </span>&nbsp;<span style="color: #000000;">
+                                01 8000 954 099 / (575)
+                                5748230
+                            </span>
+                        </span>
+                    </div>
+                    <div style="text-align: justify;">
+
+                        <div style="text-align: center;">
+                            <span style="color: #000000;">
+                                <strong>
+                                    <span style="color: #0d3c61;">Correo Institucional:</span>
+                                    &nbsp;
+                                </strong>
+                                <a href="mailto:contactenos@cesar.gov.co" style="color: #000000;">contactenos@cesar.gov.co</a>
+                                &nbsp;
+                            </span>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="color: #000000;">
+                                <span style="color: #0d3c61;">
+                                    <strong>Código Postal:</strong>&nbsp;
+                                </span>200001
+                            </span>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="color: #000000;">
+                                <span style="color: #0d3c61;">
+                                    <strong>Nit:</strong>
+                                    &nbsp;
+                                </span>892399999-1
+                            </span>
+                        </div>
+                        <div style="text-align: center;">
+                            <strong style="color: #0d3c61;">
+                                <a href="https://cesar.gov.co/d/index.php/es/2-uncategorised/2856-artpolpriv"
+                                   style="color: #0d3c61;">
+                                    Políticas
+                                    de Privacidad y Condiciones de Uso de la Información
+                                </a>
+                            </strong>
+                        </div>
+                    </div>
+                    <div>
+                        &nbsp;&nbsp;
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="~/images/banner_28.png" alt="0000 2020 imggbp 01" width="800" height="90" />
+
+                    </div>
+                    <br><br>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</footer>
+@*<script type="text/javascript">
+        $(function () {
+            $('#datetimepicker11').datetimepicker({
+                daysOfWeekDisabled: [0, 6]
+            });
+        });
+    </script>*@
+
+
+
+
+
+

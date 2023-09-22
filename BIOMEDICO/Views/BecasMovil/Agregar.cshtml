@@ -1,0 +1,457 @@
+﻿@{
+    if (Convert.ToBoolean(@ViewBag.ViewFree))
+    {
+        ViewBag.Title = "Agregar";
+        Layout = "~/Views/Shared/BuscarCitasPasaport.cshtml";
+    }
+    else
+    {
+        ViewBag.Title = "Agregar";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+}
+<link href="~/Content/css/layout.css" rel="stylesheet" />
+<script defer src="~/Scripts/APP/BecasMovil/BecasMovil.js"></script>
+
+@*<div class="contenedor">
+        <img src="~/images/243273c3-c4d6-41ce-9586-fa874800842d.png" alt="Descripción de la imagen" width="320" height="200">
+    </div>*@
+<div style="text-align: center;">
+    <img src="~/images/Encabezado.jpg" alt="0000 2020 imggbp 01" style="max-width: 100%;" />
+
+</div>
+<br />
+
+<h1 class="p-1 mb-2 text-white" style="background-color: #006068; text-align: center; ">
+    <strong>
+        FORMULARIO BECAS EN PROGRAMACIÓN MÓVIL
+    </strong>
+</h1>
+<hr width=100% align="right" size=200 color="black">
+
+<div class="row m-0">
+
+    @Html.AntiForgeryToken()
+    <form id="FormBecasMovil" name="FormBecasMovil" enctype="multipart/form-data">
+        <div asp-validation-summar="ModelOnly" class="text-danger"></div>
+
+        <div class="row m-0">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Tipo Documento <span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="TipoDocumento" name="TipoDocumento">
+                    <option value="">Seleccionar</option>
+                    <option value="Ducumento de Ciudadania">Cedula de Ciudadania</option>
+                    <option value="Registro Civil">Registro Civil</option>
+                    <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                    <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Numero Documento <span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="number" class="form-control" id="NumeroDocumento" name="NumeroDocumento" placeholder="Digite su numero de documento" />
+            </div>
+
+
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Nombres <span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="text" class="form-control" id="NombreBecasMovil" name="NombreBecasMovil" placeholder="Digite su nombre completo" />
+                <span asp-validation-for="NombresPasaporte" class="text-danger"></span>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Apellidos<span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="text" class="form-control" id="ApellidosBecasMovil" name="ApellidosBecasMovil" placeholder="Digite sus apellidos completos" />
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Cargar Tipo Documento<span style="color: red;"> *</span></strong></label>
+
+                <input type="file" class="form-control-file" id="TipoDocumentoPdf" name="TipoDocumentoPdf" accept=".pdf, .jpg, .jpeg, .png" onchange="validarArchivo(this)" />
+            </div>
+            <div id="alerta" style="display: none; color: red;">Por favor, seleccione un archivo PDF válido.</div>
+
+            @*<div class="col-xs-6 col-sm-6 col-md-6">
+            <label><strong>Tipo Documento<span style="color: red;"> *</span></strong></label>
+            <input type="file" class="form-control-file" id="TipoDocumentoPdf" name="TipoDocumentoPdf" accept=".pdf, .doc, .docx" />
+        </div>*@
+            @*<script>
+            function validarArchivo(input) {
+                var allowedExtensions = /(\.pdf)$/i;
+                var file = input.files[0];
+
+                if (!allowedExtensions.exec(file.name)) {
+                    // El archivo no es un PDF, muestra la alerta de Swal
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Por favor, seleccione un archivo PDF válido.'
+                    });
+                    input.value = ""; // Limpia el campo de entrada
+                }
+            }
+        </script>*@
+
+
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Correo electrónico<span style="color: red;"> *</span></strong> </label>
+                <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="CorreoElectronico" name="CorreoElectronico" placeholder="Digite su correo electrónico" type="email" onchange="validarCorreo(this)" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong> Número de contacto <span style="color: red;"> *</span></strong> </label>
+                <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="NumeroContacto" name="NumeroContacto" placeholder="Digite su numero de contacto" type="number" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Dirección<span style="color: red;"> *</span></strong> </label>
+                <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="Direccion" name="Direccion" placeholder="Digite su dirección" type="text" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Grupo SISBEN<span style="color: red;"> *</span></strong></label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="TipoSisben" name="TipoSisben">
+                    <option value="">Seleccionar</option>
+                    <optgroup label="Grupo A: Pobreza extrema">
+                        <option value="A1">A1</option>
+                        <option value="A2">A2</option>
+                        <option value="A3">A3</option>
+                        <option value="A4">A4</option>
+                        <option value="A5">A5</option>
+                    </optgroup>
+                    <optgroup label="Grupo B: Pobreza moderada">
+                        <option value="B1">B1</option>
+                        <option value="B2">B2</option>
+                        <option value="B3">B3</option>
+                        <option value="B4">B4</option>
+                        <option value="B5">B5</option>
+                        <option value="B6">B6</option>
+                        <option value="B7">B7</option>
+                    </optgroup>
+                    <optgroup label="Grupo C: Vulnerable">
+                        <option value="C1">C1</option>
+                        <option value="C2">C2</option>
+                        <option value="C3">C3</option>
+                        <option value="C4">C4</option>
+                        <option value="C5">C5</option>
+                        <option value="C6">C6</option>
+                        <option value="C7">C7</option>
+                        <option value="C8">C8</option>
+                        <option value="C9">C9</option>
+                        <option value="C10">C10</option>
+                        <option value="C11">C11</option>
+                        <option value="C12">C12</option>
+                        <option value="C13">C13</option>
+                        <option value="C14">C14</option>
+                        <option value="C15">C15</option>
+                        <option value="C16">C16</option>
+                        <option value="C17">C17</option>
+                        <option value="C18">C18</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Cargar Documento del Nivel de Sisbén<span style="color: red;"> *</span></strong></label>
+                <input type="file" class="form-control-file" id="NivelSisbenPdf" name="NivelSisbenPdf" accept=".pdf, .jpg, .jpeg, .png" onchange="validarArchivo(this)" />
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Grado Educativo<span style="color: red;"> *</span></strong></label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="TipoEscolaridad" name="TipoEscolaridad">
+                    <option value="">Seleccionar</option>
+                    <option value="Sin ningún grado de estudio">Sin ningún grado de estudio</option>
+                    <option value="Basica Primaria">Basica Primaria</option>
+                    <option value="Sexto">(6°) Sexto de Bachilleraro</option>
+                    <option value="Séptimo">(7°) Séptimo de Bachilleraro</option>
+                    <option value="Octavo">(8°) Octavo de Bachilleraro</option>
+                    <option value="Noveno">(9°) Noveno de Bachilleraro</option>
+                    <option value="Décimo">(10°) Décimo de Bachilleraro</option>
+                    <option value="Undécimo">(11°) Undécimo de Bachilleraro</option>
+                    <option value="Técnico">Técnico</option>
+                    <option value="Tecnológico">Tecnológico</option>
+                    <option value="Universitario">Universitario</option>
+                    <option value="Postgrados">Postgrados</option>
+                </select>
+            </div>
+
+            <div id="alerta" style="display: none; color: red;">Por favor, seleccione un archivo PDF válido.</div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Cargar Docuemnto del Nivel de escolaridad<span style="color: red;"> *</span></strong></label>
+                <input type="file" class="form-control-file" id="NivelEscolaridadPdf" name="NivelEscolaridadPdf" accept=".pdf, .jpg, .jpeg, .png" onchange="validarArchivo(this)" />
+            </div>
+            <div id="alerta" style="display: none; color: red;">Por favor, seleccione un archivo PDF válido.</div>
+
+
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Municipio de residencia<span style="color: red;"> *</span></strong></label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="MunicipioResidencia" name="MunicipioResidencia">
+                    <option value="">Seleccionar</option>
+                    <option value="Valledupar">Valledupar</option>
+                    <option value="Aguachica">Aguachica</option>
+                    <option value="Agustín Codazzi">Agustín Codazzi</option>
+                    <option value="Astrea">Astrea</option>
+                    <option value="Becerril">Becerril</option>
+                    <option value="Bosconia">Bosconia</option>
+                    <option value="Chimichagua">Chimichagua</option>
+                    <option value="Chiriguaná">Chiriguaná</option>
+                    <option value="Curumaní">Curumaní</option>
+                    <option value="El Copey">El Copey</option>
+                    <option value="El Paso">El Paso</option>
+                    <option value="Gamarra">Gamarra</option>
+                    <option value="González">González</option>
+                    <option value="La Gloria">La Gloria</option>
+                    <option value="La Jagua de Ibirico">La Jagua de Ibirico</option>
+                    <option value="La Paz">La Paz</option>
+                    <option value="Manaure">Manaure</option>
+                    <option value="Pailitas">Pailitas</option>
+                    <option value="Pelaya">Pelaya</option>
+                    <option value="Pueblo Bello">Pueblo Bello</option>
+                    <option value="Río de Oro">Río de Oro</option>
+                    <option value="San Alberto">San Alberto</option>
+                    <option value="San Diego">San Diego</option>
+                    <option value="San Martín">San Martín</option>
+                    <option value="Tamalameque">Tamalameque</option>
+
+                </select>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Lugar de nacimiento<span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="LugarNacimiento" name="LugarNacimiento">
+                    <option value="">Seleccionar</option>
+                    <option value="Valledupar">Valledupar</option>
+                    <option value="Aguachica">Aguachica</option>
+                    <option value="Agustín Codazzi">Agustín Codazzi</option>
+                    <option value="Astrea">Astrea</option>
+                    <option value="Becerril">Becerril</option>
+                    <option value="Bosconia">Bosconia</option>
+                    <option value="Chimichagua">Chimichagua</option>
+                    <option value="Chiriguaná">Chiriguaná</option>
+                    <option value="Curumaní">Curumaní</option>
+                    <option value="El Copey">El Copey</option>
+                    <option value="El Paso">El Paso</option>
+                    <option value="Gamarra">Gamarra</option>
+                    <option value="González">González</option>
+                    <option value="La Gloria">La Gloria</option>
+                    <option value="La Jagua de Ibirico">La Jagua de Ibirico</option>
+                    <option value="La Paz">La Paz</option>
+                    <option value="Manaure">Manaure</option>
+                    <option value="Pailitas">Pailitas</option>
+                    <option value="Pelaya">Pelaya</option>
+                    <option value="Pueblo Bello">Pueblo Bello</option>
+                    <option value="Río de Oro">Río de Oro</option>
+                    <option value="San Alberto">San Alberto</option>
+                    <option value="San Diego">San Diego</option>
+                    <option value="San Martín">San Martín</option>
+                    <option value="Tamalameque">Tamalameque</option>
+
+                </select>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+
+                <label><strong>Tipo de población<span style="color: red;"> *</span></strong></label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="TipoPoblacion" name="TipoPoblacion">
+                    <option value="">Seleccionar</option>
+                    <option value="Estudiante 10 y 11">Estudiante 10 y 11</option>
+                    <option value="Estudiante institución técnica o universidad">Estudiante institución técnica o universidad</option>
+                    <option value="Joven no escolarizado">Joven no escolarizado</option>
+                    <option value="Madre cabeza de hogar">Madre cabeza de hogar</option>
+                    <option value="Mujeres rurales">Mujeres rurales</option>
+                    <option value="Presidente juntas de acción comunal">Presidente juntas de acción comunal</option>
+                    <option value="Trabajador Informal">Trabajador Informal</option>
+                </select>
+            </div>
+
+
+
+
+
+
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" onchange="activarBoton()">
+                <label class="form-check-label" for="inlineCheckbox2">
+                    <br />
+                    <br />
+                    <strong>
+                        AVISO DE PRIVACIDAD: La Gobernacion del Cesar informa que los datos personales por usted suministrados serán tratados de acuerdo con la legislación vigente y nuestra política de protección de datos vigente, la cual está disponible en
+                        <a href="https://cesar.gov.co/d/filesmain/meci/mipg/2021/plan_seguridad_y_privacidad_informacion_2021.pdf" target="_blank">POLÍTICA DE PROTECCIÓN DE DATOS PERSONALES</a>
+                    </strong>
+                    <br />
+                    <br />
+                </label>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <button type="button" onclick="Createobj()" class="btn btn-block btn-outline-primary btn-rounded btn-outline mt-4" id="SaveBecasMovil" disabled>Guardar</button>
+            </div>
+
+            <script>
+                function activarBoton() {
+                    var checkbox = document.getElementById("inlineCheckbox2");
+                    var botonGuardar = document.getElementById("SaveBecasMovil");
+
+                    // Si el checkbox está seleccionado, habilitar el botón; de lo contrario, deshabilitarlo.
+                    botonGuardar.disabled = !checkbox.checked;
+                }
+            </script>
+
+
+
+            <footer id="footer">
+
+                <div class="">
+                    <div class="container">
+                        <div class="">
+                            <div id="copyright">
+
+
+
+                                <!-- BEGIN: Custom advanced (www.pluginaria.com) -->
+                                <div style="text-align: center;">
+                                    <hr style="color: #1051eae2;">
+                                    <span style="color: #0d3c61;">
+                                        <strong>Horario de Atención:</strong>
+                                    </span>&nbsp;
+                                    <span style="color: #000000;">Lunes a Viernes de 07:45 am - 12:45 pm y 02:45 pm - 05:45 pm</span>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span style="color: #000000;">
+                                        <span style="color: #0d3c61;">
+                                            <strong style="text-align: center;">Dirección:</strong>
+                                        </span>&nbsp;Calle 16 # 12 - 120 Edificio
+                                        Alfonso López Michelsen Valledupar - Cesar - Colombia
+                                    </span>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span style="color: #000000;"></span>
+                                    <span>
+                                        <span style="color: #0d3c61;">
+                                            <strong>
+                                                Líneas de Atención a la
+                                                Ciudadanía:
+                                            </strong>
+                                        </span>&nbsp;<span style="color: #000000;">
+                                            01 8000 954 099 / (575)
+                                            5748230
+                                        </span>
+                                    </span>
+                                </div>
+                                <div style="text-align: justify;">
+
+                                    <div style="text-align: center;">
+                                        <span style="color: #000000;">
+                                            <strong>
+                                                <span style="color: #0d3c61;">Correo Institucional:</span>
+                                                &nbsp;
+                                            </strong>
+                                            <a href="mailto:contactenos@cesar.gov.co" style="color: #000000;">contactenos@cesar.gov.co</a>
+                                            &nbsp;
+                                        </span>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <span style="color: #000000;">
+                                            <span style="color: #0d3c61;">
+                                                <strong>Código Postal:</strong>&nbsp;
+                                            </span>200001
+                                        </span>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <span style="color: #000000;">
+                                            <span style="color: #0d3c61;">
+                                                <strong>Nit:</strong>
+                                                &nbsp;
+                                            </span>892399999-1
+                                        </span>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <strong style="color: #0d3c61;">
+                                            <a href="https://cesar.gov.co/d/index.php/es/2-uncategorised/2856-artpolpriv"
+                                               style="color: #0d3c61;">
+                                                Políticas
+                                                de Privacidad y Condiciones de Uso de la Información
+                                            </a>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div>
+                                    &nbsp;&nbsp;
+                                </div>
+                                <div style="text-align: center;">
+                                    <img src="~/images/banner_28.png" alt="0000 2020 imggbp 01" style="max-width: 100%;" />
+
+                                </div>
+                                <br><br>
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </footer>
+
+
+
+
+            <style>
+
+                #footer {
+                    text-align: center;
+                    width: 100%;
+                    background-color: #f5f5f5;
+                    padding: 20px;
+                }
+
+                    #footer img {
+                        max-width: 100%;
+                        height: auto;
+                    }
+
+                    #footer div {
+                        max-width: 100%;
+                    }
+            </style>
+
+
+            <script>
+                function validarArchivo(input) {
+                    var allowedExtensions = /(\.pdf|\.jpg|\.jpeg|\.png)$/i;
+                    var file = input.files[0];
+
+                    if (!allowedExtensions.exec(file.name)) {
+                        // El archivo no es un PDF ni una imagen, muestra la alerta de Swal
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Por favor, seleccione un archivo PDF o una imagen válida (jpg, jpeg, png).'
+                        });
+                        input.value = ""; // Limpia el campo de entrada
+                    }
+                }
+            </script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    document.getElementById('NumeroDocumento').addEventListener('blur', function () {
+                        var numeroDocumento = this.value.trim();
+                        if (numeroDocumento.length < 6) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'El número de documento debe tener al menos 6 dígitos',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    });
+                });
+            </script>
+
+

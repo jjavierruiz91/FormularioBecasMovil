@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Agregar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script defer src="~/Scripts/APP/Sucursal/Sucursal.js"></script>
+<h2><strong>Registro Sucursales Pasaportes</strong></h2>
+
+<hr width=100% align="right" size=200 color="black">
+
+<div class="row m-0">
+
+    <form id="FormSucursalesPasaporte" name="FormSucursalesPasaporte">
+
+        <div class="row m-0">
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <label><strong>Codigo Sucursal</strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="CodSucursal" name="CodSucursal" />
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <label><strong>Estado Sucursales</strong></label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="EstadoSucursal" name="EstadoSucursal">
+                    <option value="">Seleccionar</option>
+                    <option value="ACTIVO">ACTIVO</option>
+                    <option value="INACTIVO">INACTIVO</option>
+                </select>
+            </div>
+
+                      <div class="col-xs-4 col-sm-4 col-md-4">
+                <label><strong>Region Sucursal</strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="EspecialidadSucursal" name="EspecialidadSucursal" />
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <label><strong>Direccción</strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="Direcccion" name="Direcccion" />
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <label><strong>Telefono</strong>   </label>
+                <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="Telefono" onkeypress="return soloNumeros(event)" name="Telefono" />
+            </div>
+
+            
+            
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <label><strong>Correo</strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="text" class="form-control" id="Correo" name="Correo" />
+            </div>
+
+        </div>
+    </form>
+
+    <div class="col-xs-4 col-sm-4 col-md-4">
+        <button type="button" onclick="Createobj()" class="btn btn-block btn-outline-primary btn-rounded btn-outline mt-4" id="SaveSucursal">Guardar</button>
+    </div>
+</div>
+
+
+
+

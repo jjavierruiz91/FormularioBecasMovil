@@ -1,0 +1,457 @@
+﻿
+@{
+    if (Convert.ToBoolean(@ViewBag.ViewFree))
+    {
+        ViewBag.Title = "Agregar";
+        Layout = "~/Views/Shared/BuscarCitasPasaport.cshtml";
+    }
+    else
+    {
+        ViewBag.Title = "Agregar";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+}
+
+
+<script defer src="~/Scripts/APP/PoliticaSocial/PoliticaSocial.js"></script>
+
+<h1 class="p-1 mb-2 text-white" style="background-color: #006068; text-align: center; "><strong>FORMULARIO SOLICITUD DE TRAMITE PASAPORTE</strong></h1>
+<hr width=100% align="right" size=200 color="black">
+
+<div class="">
+
+    <form id="FormCitasMedicasDeportiva" name="FormCitasMedicasDeportiva">
+
+        <div class="row m-1">
+            
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Tipo Solicitud <span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="TipoSolicitudPasaporte" name="TipoSolicitudPasaporte">
+                    <option value="">Seleccionar</option>
+                    <option value="Pasaporte Primera Vez">Pasaporte Primera Vez</option>
+                    <option value="Renovacion Pasaporte">Renovacion Pasaporte</option>
+
+                </select>
+            </div>
+
+
+        </div>
+
+
+    </form>
+
+</div>
+<br />
+<br />
+<h1 class="p-1 mb-2 text-white" style="background-color: #006068; text-align: center; "><strong>DATOS PERSONALES DEL SOLICITANTE DEL PASAPORTE</strong></h1>
+<hr width=100% align="right" size=200 color="black">
+
+<div class="row m-0">
+
+    @Html.AntiForgeryToken()
+    <form id="FormCitasMedicasDeportiva2" name="FormCitasMedicasDeportiva2">
+        <div asp-validation-summar="ModelOnly" class="text-danger"></div>
+
+        <div class="row m-0">
+
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Tipo Documento <span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="TipoDocumentoPasaporte" name="TipoDocumentoPasaporte">
+                    <option value="">Seleccionar</option>
+                    <option value="Ducumento de Ciudadania">Cedula de Ciudadania</option>
+                    <option value="Registro Civil">Registro Civil</option>
+                    <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                    <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Numero Documento <span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="number" class="form-control" id="NumDocumentoPasaporte" name="" placeholder="Digite su numero de documento" required onchange="ValidarCedula()" />
+            </div>
+            @*<div class="col-xs-4 col-sm-4 col-md-4" style="right:inherit">
+
+                    <button type="button" class="btn btn-block btn-outline-primary btn-rounded btn-outline mt-4" onclick="CargarInfoinicial()">Buscar</button>
+                </div>*@
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Tipo Pasaporte <span style="color: red;"> *</span></strong> </label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="TipoPasaporte" name="TipoPasaporte">
+                    <option value="">Seleccionar</option>
+                    <option value="Pasaporte Ordinario">Pasaporte Ordinario 32 páginas ($ 302.463)Pesos colombianos</option>
+                    <option value="Pasaporte Ejecutivo">Pasaporte Ejecutivo 48 páginas ($ 397.521)Pesos colombianos</option>
+                    @*<option value="Pasaporte Emergencia">Pasaporte Emergencia ($ 317.000)Pesos colombianos</option>*@
+
+                </select>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Nombres <span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="text" class="form-control" id="NombresPasaporte" name="NombresPasaporte" placeholder="Digite su nombre completo" />
+                <span asp-validation-for="NombresPasaporte" class="text-danger"></span>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Apellidos<span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="text" class="form-control" id="ApellidosPasaporte" name="ApellidosPasaporte" placeholder="Digite sus apellidos completos" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Fecha Expedición Documento<span style="color: red;"> *</span></strong></label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="date" class="form-control" id="FechaExpedicionDocumento" name="FechaExpedicionDocumento" placeholder="Digite la fecha de expedicion de su documento" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Telefono / Celular <span style="color: red;"> *</span></strong> </label>
+                <input style="border: black; border-width: 1px; border-style: solid;" type="number" class="form-control" id="CelularPasaporte" name="CelularPasaporte" placeholder="Digite su numero de celular" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Correo electrónico<span style="color: red;"> *</span></strong> </label>
+                <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="CorreoPasaporte" name="CorreoPasaporte" placeholder="Digite su correo electronico" type="email" />
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Confirmar su correo electrónico<span style="color: red;"> *</span></strong> </label>
+                <input style="border: black; border-width: 1px; border-style: solid;" class="form-control" id="CorreoPasaporteRepeated" name="CorreoPasaporteRepeated" placeholder="Digite su correo electronico" type="email" />
+            </div>
+
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Sucursal<span style="color: red;"> *</span></strong> </label>
+
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="Sucursales" name="Sucursales" onchange="CargarSelectFecha()">
+                    <option style="border: black; border-width: 1px; border-style: solid;" value="">Seleccionar</option>
+                </select>
+            </div>
+
+
+        </div>
+
+
+
+    </form>
+
+
+
+</div>
+
+<div class="">
+
+    <form id="FormCitasMedicasDeportiva3" name="FormCitasMedicasDeportiva3">
+
+        <div class="row m-1">
+
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Fecha <span style="color: red;"> *</span></strong></label>
+                <input type="text" name="FechaCalen" id="FechaCalen" class="pickdate form-control" onchange="CargarSelectHora()" />
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <label><strong>Hora <span style="color: red;"> *</span></strong></label>
+                <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="Hora" name="Hora" onchange="CargarSelectMInutos()">
+                    <option style="border: black; border-width: 1px; border-style: solid;" value="">Seleccionar</option>
+                    <option  value="">Seleccionar</option>
+
+                </select>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                @*<label><strong>Minutos<span style="color: red;"> *</span></strong>   </label>*@
+                 <input type="hidden" name="Minutos" id="Minutos" class="form-control"  />
+                <!--<select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="Minutos" name="Minutos">
+                    <option style="border: black; border-width: 1px; border-style: solid;" value="">Seleccionar</option>
+
+
+                </select>-->
+
+            </div>
+
+          
+
+        </div>
+
+
+
+    </form>
+
+
+
+</div>
+
+@*<script type="text/javascript">
+        $(function () {
+            $('#datetimepicker11').datetimepicker({
+                daysOfWeekDisabled: [0, 6]
+            });
+        });
+    </script>*@
+
+<STYLE>
+    .hideable {
+        position: relative;
+        visibility: visible;
+    }
+</STYLE>
+<style type="text/css" media="screen">
+    :root {
+        --color-green: #00a878;
+        --color-red: #fe5e41;
+        --color-button: #fdffff;
+        --color-black: #000;
+    }
+
+    .switch-button {
+        display: inline-block;
+    }
+
+        .switch-button .switch-button__checkbox {
+            display: none;
+        }
+
+        .switch-button .switch-button__label {
+            background-color: var(--color-red);
+            width: 5rem;
+            height: 3rem;
+            border-radius: 3rem;
+            display: inline-block;
+            position: relative;
+        }
+
+            .switch-button .switch-button__label:before {
+                transition: .2s;
+                display: block;
+                position: absolute;
+                width: 3rem;
+                height: 3rem;
+                background-color: var(--color-button);
+                content: '';
+                border-radius: 50%;
+                box-shadow: inset 0px 0px 0px 1px var(--color-black);
+            }
+
+        .switch-button .switch-button__checkbox:checked + .switch-button__label {
+            background-color: var(--color-green);
+        }
+
+            .switch-button .switch-button__checkbox:checked + .switch-button__label:before {
+                transform: translateX(2rem);
+            }
+</style>
+<SCRIPT>
+    function Mostrar_Ocultar(show) {
+        if (document.layers)
+            /*aqui se cambian los valores 'show' y 'hide' para cultarlo o mostrarlo
+            aqui la variable  (hide) esta en show para ver los campos
+            document.contenido.visibility = ****variable(hide)**** ? ****estado('show') ****y despues *****: 'hide'; */
+            document.contenido.visibility = show ? 'show' : 'hide';
+        else {
+            var g = document.all ? document.all.contenido :
+                document.getElementById('contenido');
+            g.style.visibility = show ? 'visible' : 'hidden';
+        }
+    }
+</SCRIPT>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#hide").on('click', function () {
+            $("#element").hide();
+            return false;
+        });
+
+        $("#show").on('click', function () {
+            $("#element").show();
+            return false;
+        });
+    });
+</script>
+
+<br />
+<br />
+
+
+<div class="">
+
+    <form id="FormCitasMedicasDeportiva4" name="FormCitasMedicasDeportiva4">
+
+
+
+        <div >
+            <label><strong>¿La cita es para un menor de edad?</strong> </label>
+            <p><a class="btn btn-outline-primary" href="#" id="show"><i class="fa fa-eye"></i> Si</a></p>
+            <div id="content" class="">
+                <div id="element" style="display: none;">
+                    <div id="close"><a class="btn btn-outline-primary mr-auto" href="#" id="hide" title="Cerrar"><i class="fa fa-close"></i> No</a></div>
+                    <br />
+
+                    <div class="">
+
+                        <h1 class="p-1 mb-2 text-white" style="background-color: #006068; text-align: center; "><strong>DATOS DEL ACOMPAÑANTE DEL MENOR DE EDAD</strong></h1>
+                        <hr width=100% align="right" size=200 color="black">
+                        <div>
+                            <label><strong>Cual es su parentesco con el menor de edad Documento</strong> </label>
+                            <select style="border: black; border-width: 1px; border-style: solid;" class="select2 form-control" id="ParentescoMenor" name="ParentescoMenor">
+                                <option value="">Seleccionar</option>
+                                <option value="Madre">Madre</option>
+                                <option value="Padre">Padre</option>
+                                <option value="Tutor Legal">Tutor Legal</option>
+
+                            </select>
+                        </div>
+
+                        <div>
+                            <label><strong>Nombre del responsable del menor</strong></label>
+                            <input style="border: black; border-width: 1px; border-style: solid;" type="text" class="form-control" id="CuantosMenores" name="CuantosMenores" placeholder="Digite su nombre completo" />
+                        </div>
+
+                        <br />
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            @*<div class="form-check">
+                <input class="form-check-input" value="SI" type="radio" name="Accion" id="MenoresEdadPasaporte" ONCLICK="Mostrar_Ocultar(this.checked)" checked >
+                <label class="form-check-label" for="flexRadioDefault1">
+                    SI
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" value="NO" type="radio" name="Accion" id="MenoresEdadPasaporte"  >
+                <label class="form-check-label" for="flexRadioDefault1">
+                    NO
+                </label>
+            </div>*@
+
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">
+                <strong>
+                    ACEPTO: La información suministrada en el formulario será utilizada por la Oficina de Pasaportes para el manejo y gestión de servicios o trámites efectuados por la entidad de acuerdo a lo establecido en la Ley 1581 de 2012.
+
+                </strong>
+            </label>
+        </div>
+
+
+
+    </form>
+
+
+
+
+</div>
+
+
+
+
+    <div class="col-xs-6 col-sm-6 col-md-6">
+        <button type="button" onclick="Createobj()" class="btn btn-block btn-outline-primary btn-rounded btn-outline mt-4" id="SaveCitasPasaporte">Guardar</button>
+    </div>
+
+
+    <footer id="footer">
+
+        <div class="">
+            <div class="container">
+                <div class="">
+                    <div id="copyright">
+
+
+
+                        <!-- BEGIN: Custom advanced (www.pluginaria.com) -->
+                        <div style="text-align: center;">
+                            <hr style="color: #1051eae2;">
+                            <span style="color: #0d3c61;">
+                                <strong>Horario de Atención:</strong>
+                            </span>&nbsp;
+                            <span style="color: #000000;">Lunes a Viernes de 07:45 am - 12:45 pm y 02:45 pm - 05:45 pm</span>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="color: #000000;">
+                                <span style="color: #0d3c61;">
+                                    <strong style="text-align: center;">Dirección:</strong>
+                                </span>&nbsp;Calle 16 # 12 - 120 Edificio
+                                Alfonso López Michelsen Valledupar - Cesar - Colombia
+                            </span>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="color: #000000;"></span>
+                            <span>
+                                <span style="color: #0d3c61;">
+                                    <strong>
+                                        Líneas de Atención a la
+                                        Ciudadanía:
+                                    </strong>
+                                </span>&nbsp;<span style="color: #000000;">
+                                    01 8000 954 099 / (575)
+                                    5748230
+                                </span>
+                            </span>
+                        </div>
+                        <div style="text-align: justify;">
+
+                            <div style="text-align: center;">
+                                <span style="color: #000000;">
+                                    <strong>
+                                        <span style="color: #0d3c61;">Correo Institucional:</span>
+                                        &nbsp;
+                                    </strong>
+                                    <a href="mailto:contactenos@cesar.gov.co" style="color: #000000;">contactenos@cesar.gov.co</a>
+                                    &nbsp;
+                                </span>
+                            </div>
+                            <div style="text-align: center;">
+                                <span style="color: #000000;">
+                                    <span style="color: #0d3c61;">
+                                        <strong>Código Postal:</strong>&nbsp;
+                                    </span>200001
+                                </span>
+                            </div>
+                            <div style="text-align: center;">
+                                <span style="color: #000000;">
+                                    <span style="color: #0d3c61;">
+                                        <strong>Nit:</strong>
+                                        &nbsp;
+                                    </span>892399999-1
+                                </span>
+                            </div>
+                            <div style="text-align: center;">
+                                <strong style="color: #0d3c61;">
+                                    <a href="https://cesar.gov.co/d/index.php/es/2-uncategorised/2856-artpolpriv"
+                                       style="color: #0d3c61;">
+                                        Políticas
+                                        de Privacidad y Condiciones de Uso de la Información
+                                    </a>
+                                </strong>
+                            </div>
+                        </div>
+                        <div>
+                            &nbsp;&nbsp;
+                        </div>
+                        <div style="text-align: center;">
+                            <img src="~/images/banner_28.png" alt="0000 2020 imggbp 01" width="800" height="90" />
+
+                        </div>
+                        <br><br>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </footer>
+  
+
+
+
+
+
+
