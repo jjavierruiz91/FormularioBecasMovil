@@ -1,66 +1,126 @@
-﻿
-function Save_Data(callbacksussces, Url, ObjetoGuardar, TituloMensaje, Recargar, callbackerror) {
+﻿function Save_Data(callbacksussces, Url, ObjetoGuardar, TituloMensaje, Recargar, callbackerror) {
     var formURL = SetUrlForQueryLocal(Url);
 
     // Obtener el nombre y apellido del formulario
-    var NombreBecasMovil = $("#NombreBecasMovil").val(); // Reemplaza "nombre" con el ID del campo de nombre en tu formulario
-    var ApellidosBecasMovil = $("#ApellidosBecasMovil").val(); // Reemplaza "nombre" con el ID del campo de nombre en tu formulario
-    var NumeroDocumento = $("#NumeroDocumento").val(); // Reemplaza "nombre" con el ID del campo de nombre en tu formulario
+    var NombreBecasMovil = $("#NombreBecasMovil").val();
+    var ApellidosBecasMovil = $("#ApellidosBecasMovil").val();
+    var NumeroDocumento = $("#NumeroDocumento").val();
 
     // Agregar nombre y apellido al objeto a guardar
     ObjetoGuardar.NombreBecasMovil = NombreBecasMovil;
     ObjetoGuardar.ApellidosBecasMovil = ApellidosBecasMovil;
     ObjetoGuardar.NumeroDocumento = NumeroDocumento;
 
+    $.ajax({
+        url: formURL,
+        type: "POST",
+        dataType: "json",
+        data: JSON.stringify(ObjetoGuardar),
+        contentType: "application/json",
+        success: function (data, textStatus, jqXHR) {
+            if (!data.Error) {
+                var TituloMensaje = "¡Registro Exitoso!\nNúmero de Documento: " + NumeroDocumento + "\n" + NombreBecasMovil + " " + ApellidosBecasMovil + "!";
 
-    $.ajax(
-        {
-            url: formURL,
-            type: "POST",
-            dataType: "json",
-            data: JSON.stringify(ObjetoGuardar),
-            contentType: "application/json",
-            success: function (data, textStatus, jqXHR) {
-                if (!data.Error) {
-                    var TituloMensaje = "¡Registro Exitoso!\nNúmero de Documento: " + NumeroDocumento + "\n" + NombreBecasMovil + " " + ApellidosBecasMovil + "!";
-
-                    swal.fire({
-                        title: TituloMensaje,
-                        text: data.mensaje,
-                        type: "success",
-                        confirmButtonClass: "btn-outline-primary",
-                        confirmButtonText: "Gracias por su visita",
-                        closeOnConfirm: false,
-                        closeOnCancel: false
+                swal.fire({
+                    title: TituloMensaje,
+                    text: data.mensaje,
+                    type: "success",
+                    confirmButtonClass: "btn-outline-primary",
+                    confirmButtonText: "Gracias por su visita",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        swal.close()
+                        callbacksussces(data)
+                    } else if (result.isDenied) {
+                        swal.close()
                     }
-                    ).then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            swal.close()
-                            callbacksussces(data)
-                        } else if (result.isDenied) {
-                            swal.close()                        }
-                    });
-
-                }
-                else {
-                    //SwalErrorMsj(data.mensaje);
-                    swal.fire({
-                        title: "¡Atencion!",
-                        text: data.mensaje,
-                        //confirmButtonColor: "#ab2328",
-                        type: "error",
-                        closeOnConfirm: true,
-                    });
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(errorThrown);
+                });
+            } else {
+                swal.fire({
+                    title: "¡Atención!",
+                    text: data.mensaje,
+                    type: "error",
+                    closeOnConfirm: true,
+                });
             }
-        });
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Error en la solicitud AJAX: " + textStatus);
+            console.log("Detalles del error: " + errorThrown);
+            console.log("Respuesta del servidor: " + jqXHR.responseText);
 
-
+            // Llama a la función de callback de error si la tienes
+            if (typeof callbackerror === "function") {
+                callbackerror(jqXHR, textStatus, errorThrown);
+            }
+        }
+    });
 }
+
+//function Save_Data(callbacksussces, Url, ObjetoGuardar, TituloMensaje, Recargar, callbackerror) {
+//    var formURL = SetUrlForQueryLocal(Url);
+
+//    // Obtener el nombre y apellido del formulario
+//    var NombreBecasMovil = $("#NombreBecasMovil").val(); // Reemplaza "nombre" con el ID del campo de nombre en tu formulario
+//    var ApellidosBecasMovil = $("#ApellidosBecasMovil").val(); // Reemplaza "nombre" con el ID del campo de nombre en tu formulario
+//    var NumeroDocumento = $("#NumeroDocumento").val(); // Reemplaza "nombre" con el ID del campo de nombre en tu formulario
+
+//    // Agregar nombre y apellido al objeto a guardar
+//    ObjetoGuardar.NombreBecasMovil = NombreBecasMovil;
+//    ObjetoGuardar.ApellidosBecasMovil = ApellidosBecasMovil;
+//    ObjetoGuardar.NumeroDocumento = NumeroDocumento;
+
+
+//    $.ajax(
+//        {
+//            url: formURL,
+//            type: "POST",
+//            dataType: "json",
+//            data: JSON.stringify(ObjetoGuardar),
+//            contentType: "application/json",
+//            success: function (data, textStatus, jqXHR) {
+//                if (!data.Error) {
+//                    var TituloMensaje = "¡Registro Exitoso!\nNúmero de Documento: " + NumeroDocumento + "\n" + NombreBecasMovil + " " + ApellidosBecasMovil + "!";
+
+//                    swal.fire({
+//                        title: TituloMensaje,
+//                        text: data.mensaje,
+//                        type: "success",
+//                        confirmButtonClass: "btn-outline-primary",
+//                        confirmButtonText: "Gracias por su visita",
+//                        closeOnConfirm: false,
+//                        closeOnCancel: false
+//                    }
+//                    ).then((result) => {
+//                        /* Read more about isConfirmed, isDenied below */
+//                        if (result.isConfirmed) {
+//                            swal.close()
+//                            callbacksussces(data)
+//                        } else if (result.isDenied) {
+//                            swal.close()                        }
+//                    });
+
+//                }
+//                else {
+//                    //SwalErrorMsj(data.mensaje);
+//                    swal.fire({
+//                        title: "¡Atencion!",
+//                        text: data.mensaje,
+//                        //confirmButtonColor: "#ab2328",
+//                        type: "error",
+//                        closeOnConfirm: true,
+//                    });
+//                }
+//            },
+//            error: function (jqXHR, textStatus, errorThrown) {
+//                console.log(errorThrown);
+//            }
+//        });
+
+
+//}
 
 
 
