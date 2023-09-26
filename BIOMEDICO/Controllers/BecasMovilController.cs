@@ -142,17 +142,77 @@ namespace BIOMEDICO.Controllers
                     //una vez registres la informacion del usuario creacion el directorio
                     // con nombre de el numero de documento
                     //falta definir en que ubiacion quieres que se guarden las carpetas
+                    //string basePath = AppDomain.CurrentDomain.BaseDirectory;
+                    //string path = Path.Combine(basePath, "ArchivosPDF", $"{a.BecasMovilSport.NumeroDocumento}");
+                    //if (!Directory.Exists(path))
+                    //{
+                    //    Directory.CreateDirectory(path);
+                    //}
+                    //System.IO.File.WriteAllBytes($"{path}/{a.BecasMovilSport.NumeroDocumento}-documento.pdf", Convert.FromBase64String(a.BecasMovilSport.TipoDocumentoPdf));
+                    //System.IO.File.WriteAllBytes($"{path}/{a.BecasMovilSport.NumeroDocumento}-sisben.pdf", Convert.FromBase64String(a.BecasMovilSport.NivelSisbenPdf));
+                    //System.IO.File.WriteAllBytes($"{path}/{a.BecasMovilSport.NumeroDocumento}-escolaridad.pdf", Convert.FromBase64String(a.BecasMovilSport.NivelEscolaridadPdf));
                     string basePath = AppDomain.CurrentDomain.BaseDirectory;
                     string path = Path.Combine(basePath, "ArchivosPDF", $"{a.BecasMovilSport.NumeroDocumento}");
+
                     if (!Directory.Exists(path))
                     {
                         Directory.CreateDirectory(path);
                     }
-                    System.IO.File.WriteAllBytes($"{path}/{a.BecasMovilSport.NumeroDocumento}-documento.pdf", Convert.FromBase64String(a.BecasMovilSport.TipoDocumentoPdf));
-                    System.IO.File.WriteAllBytes($"{path}/{a.BecasMovilSport.NumeroDocumento}-sisben.pdf", Convert.FromBase64String(a.BecasMovilSport.NivelSisbenPdf));
-                    System.IO.File.WriteAllBytes($"{path}/{a.BecasMovilSport.NumeroDocumento}-escolaridad.pdf", Convert.FromBase64String(a.BecasMovilSport.NivelEscolaridadPdf));
-                    // por carpeta ejempo sisben, docuemntos y cada una con su identificacion
-                    //crea un meet para hablar yo me uno enviado patron
+
+                    // Supongamos que a.BecasMovilSport.TipoDocumentoPdf es un PDF, a.BecasMovilSport.NivelSisbenPdf es una imagen (por ejemplo, JPEG) y a.BecasMovilSport.NivelEscolaridadPdf también es un PDF.
+
+                    if (EsPDF(a.BecasMovilSport.TipoDocumentoPdf))
+                    {
+                        System.IO.File.WriteAllBytes($"{path}/{a.BecasMovilSport.NumeroDocumento}-documento.pdf", Convert.FromBase64String(a.BecasMovilSport.TipoDocumentoPdf));
+                    }
+                    else
+                    {
+                        // Si no es un PDF, guárdalo como imagen
+                        System.IO.File.WriteAllBytes($"{path}/{a.BecasMovilSport.NumeroDocumento}-documento.jpg", Convert.FromBase64String(a.BecasMovilSport.TipoDocumentoPdf));
+                    }
+
+                    if (EsPDF(a.BecasMovilSport.NivelSisbenPdf))
+                    {
+                        System.IO.File.WriteAllBytes($"{path}/{a.BecasMovilSport.NumeroDocumento}-sisben.pdf", Convert.FromBase64String(a.BecasMovilSport.NivelSisbenPdf));
+                    }
+                    else
+                    {
+                        // Si no es un PDF, guárdalo como imagen
+                        System.IO.File.WriteAllBytes($"{path}/{a.BecasMovilSport.NumeroDocumento}-sisben.jpg", Convert.FromBase64String(a.BecasMovilSport.NivelSisbenPdf));
+                    }
+
+                    if (EsPDF(a.BecasMovilSport.NivelEscolaridadPdf))
+                    {
+                        System.IO.File.WriteAllBytes($"{path}/{a.BecasMovilSport.NumeroDocumento}-escolaridad.pdf", Convert.FromBase64String(a.BecasMovilSport.NivelEscolaridadPdf));
+                    }
+                    else
+                    {
+                        // Si no es un PDF, guárdalo como imagen
+                        System.IO.File.WriteAllBytes($"{path}/{a.BecasMovilSport.NumeroDocumento}-escolaridad.jpg", Convert.FromBase64String(a.BecasMovilSport.NivelEscolaridadPdf));
+                    }
+
+                    // Función para verificar si es un PDF
+                    bool EsPDF(string base64String)
+                    {
+                        // Convierte la cadena base64 en un array de bytes
+                        byte[] bytes = Convert.FromBase64String(base64String);
+
+                        // Verifica si los primeros bytes coinciden con la cabecera de un PDF ("%PDF-")
+                        if (bytes.Length >= 5 &&
+                            bytes[0] == 0x25 && // %
+                            bytes[1] == 0x50 && // P
+                            bytes[2] == 0x44 && // D
+                            bytes[3] == 0x46 && // F
+                            bytes[4] == 0x2D)   // -
+                        {
+                            // Si los primeros bytes coinciden, es un PDF
+                            return true;
+                        }
+
+                        // Si no se cumple la condición, no es un PDF
+                        return false;
+                    }
+
 
                     Retorno.Error = false;
                     Retorno.mensaje = "Formulario Becas Movil.! ";
@@ -169,6 +229,7 @@ namespace BIOMEDICO.Controllers
             }
             return Json(Retorno, JsonRequestBehavior.AllowGet);
         }
+
 
 
         [HttpGet]

@@ -31,5 +31,6 @@ namespace BIOMEDICO.Models
         public Nullable<System.DateTime> FechaRegistro { get; set; }
         public string TipoSisben { get; set; }
         public string TipoEscolaridad { get; set; }
+        public string InstitucionEducativa { get; set; }
     }
 }

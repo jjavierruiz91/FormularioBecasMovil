@@ -65,6 +65,7 @@
           <Property Name="FechaRegistro" Type="datetime" />
           <Property Name="TipoSisben" Type="varchar(max)" />
           <Property Name="TipoEscolaridad" Type="varchar(max)" />
+          <Property Name="InstitucionEducativa" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Permisos">
           <Key>
@@ -392,6 +393,7 @@
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
           <Property Name="TipoSisben" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TipoEscolaridad" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="InstitucionEducativa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -501,6 +503,7 @@
           <EntitySetMapping Name="BecasMovil">
             <EntityTypeMapping TypeName="BIOMEDICOModel.BecasMovil">
               <MappingFragment StoreEntitySet="BecasMovil">
+                <ScalarProperty Name="InstitucionEducativa" ColumnName="InstitucionEducativa" />
                 <ScalarProperty Name="TipoEscolaridad" ColumnName="TipoEscolaridad" />
                 <ScalarProperty Name="TipoSisben" ColumnName="TipoSisben" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />

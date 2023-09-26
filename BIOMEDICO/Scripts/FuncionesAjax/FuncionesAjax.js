@@ -1,6 +1,18 @@
 ﻿
 function Save_Data(callbacksussces, Url, ObjetoGuardar, TituloMensaje, Recargar, callbackerror) {
     var formURL = SetUrlForQueryLocal(Url);
+
+    // Obtener el nombre y apellido del formulario
+    var NombreBecasMovil = $("#NombreBecasMovil").val(); // Reemplaza "nombre" con el ID del campo de nombre en tu formulario
+    var ApellidosBecasMovil = $("#ApellidosBecasMovil").val(); // Reemplaza "nombre" con el ID del campo de nombre en tu formulario
+    var NumeroDocumento = $("#NumeroDocumento").val(); // Reemplaza "nombre" con el ID del campo de nombre en tu formulario
+
+    // Agregar nombre y apellido al objeto a guardar
+    ObjetoGuardar.NombreBecasMovil = NombreBecasMovil;
+    ObjetoGuardar.ApellidosBecasMovil = ApellidosBecasMovil;
+    ObjetoGuardar.NumeroDocumento = NumeroDocumento;
+
+
     $.ajax(
         {
             url: formURL,
@@ -10,6 +22,8 @@ function Save_Data(callbacksussces, Url, ObjetoGuardar, TituloMensaje, Recargar,
             contentType: "application/json",
             success: function (data, textStatus, jqXHR) {
                 if (!data.Error) {
+                    var TituloMensaje = "¡Registro Exitoso!\nNúmero de Documento: " + NumeroDocumento + "\n" + NombreBecasMovil + " " + ApellidosBecasMovil + "!";
+
                     swal.fire({
                         title: TituloMensaje,
                         text: data.mensaje,
